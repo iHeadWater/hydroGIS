@@ -14,7 +14,7 @@ practices for gis(mainly ArcGIS) in hydrology
 - 移动开发工具：
 - 深度学习：数据集[awesome-satellite-imagery-datasets](https://github.com/chrieke/awesome-satellite-imagery-datasets)
 - 地图渲染：－
-- 地理空间库：见过几个python库和JS库
+- 地理空间库：
     - [GeoPandas](https://github.com/geopandas/geopandas)
     - [**Pyproj**](https://github.com/pyproj4/pyproj)
     - [ArcGIS Python API](https://developers.arcgis.com/python/)
@@ -25,5 +25,7 @@ practices for gis(mainly ArcGIS) in hydrology
     - SaaS：Mapbox
 - 数据：
     - 数据网站：[Free GIS Data](http://freegisdata.rtwilson.com/)
+- 教程：
+    - [Automating GIS-processes](https://automating-gis-processes.github.io/site/)
 
 注：还有很多其他资源没见过，就不copy了，另－－加粗项是目前有记录的。
