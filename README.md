@@ -17,7 +17,6 @@ practices for gis(mainly ArcGIS) in hydrology
 - 地理空间库：
     - [GeoPandas](https://github.com/geopandas/geopandas)
     - [**Pyproj**](https://github.com/pyproj4/pyproj)
-    - [ArcGIS Python API](https://developers.arcgis.com/python/)
     - [Cesium](https://github.com/AnalyticalGraphicsInc/cesium)
 - 标准：NetCDF, WaterML
 - 云服务：
@@ -26,6 +25,6 @@ practices for gis(mainly ArcGIS) in hydrology
 - 数据：
     - 数据网站：[Free GIS Data](http://freegisdata.rtwilson.com/)
 - 教程：
-    - [Automating GIS-processes](https://automating-gis-processes.github.io/site/)
+    - [**Automating GIS-processes**](https://automating-gis-processes.github.io/site/)
 
 注：还有很多其他资源没见过，就不copy了，另－－加粗项是目前有记录的。
