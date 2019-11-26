@@ -64,7 +64,11 @@
     
 ## 安装库
 
-许多GIS包来自conda的一个特定channel，即conda-forge，开始先安装geopandas，后面再在需要的时候安装所需的。因为安装geopandas的时候会自动地安装一些基础GIS包，比如Shapely和fiona，所以先执行下面的程序即可：
+许多GIS包来自conda的一个特定channel，即conda-forge，开始先安装geopandas，后面再在需要的时候安装所需的。因为安装geopandas的时候会自动地安装一些基础GIS包，比如Shapely和fiona
+
+### win10下安装
+
+所以先执行下面的程序即可：
 
 ``` python
 conda install geopandas -c conda-forge
@@ -75,4 +79,24 @@ conda install geopandas -c conda-forge
 ``` python
 # Install geoplot
 conda install -c conda-forge geoplot
+# upgrade pyproj
+conda update pyproj -c conda-forge
+```
+
+### Ubuntu 18.04下安装
+
+在Ubuntu18.04下按照上述方式安装后，import geopandas报错了，可能是由于conda下安装的版本，fiona和geopandas的版本不匹配，因此直接用conda uninstall 将其卸载，并重新用pip install 安装了，再导入发现没有错误了。然后卸载的时候好像也把geoplot卸载了，所以也重新再用pip安装一次。总之使用下面的pip也可以轻松安装好geopandas，和geoplot
+
+```python
+#  如果用conda安装了，就把geopandas卸载了
+conda uninstall geopandas
+# 安装
+pip install geopandas
+pip install geoplot
+```
+
+安装pyproj，见pyproj文件夹下内容。可能已经安装，但是需要更新。
+
+``` python
+pip install --upgrade pyproj
 ```

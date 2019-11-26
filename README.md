@@ -14,8 +14,10 @@ practices for gis(mainly ArcGIS) in hydrology
 - 移动开发工具：
 - 深度学习：数据集[awesome-satellite-imagery-datasets](https://github.com/chrieke/awesome-satellite-imagery-datasets)
 - 地图渲染：－
-- 地理空间库：
-    - [GeoPandas](https://github.com/geopandas/geopandas)
+- 地理空间库：这部分的学习使用记录在AutoGIS文件夹下，目前主要是python下的一些库。
+    - [**Shapely**](https://github.com/Toblerity/Shapely)：操作分析geometric objects in the Cartesian plane.
+    - [**Fiona**](http://github.com/toblerity/fiona/)：IO for GIS Data
+    - [**GeoPandas**](https://github.com/geopandas/geopandas)
     - [**Pyproj**](https://github.com/pyproj4/pyproj)
     - [Cesium](https://github.com/AnalyticalGraphicsInc/cesium)
 - 标准：**NetCDF**, WaterML
