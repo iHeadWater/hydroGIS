@@ -1,4 +1,8 @@
-"""读取netcdf文件，计算给定的shapefile代表的范围内该netcdf文件的给定变量的流域平均值"""
+"""读取netcdf文件，计算给定的shapefile代表的范围内该netcdf文件的给定变量的流域平均值
+算法需要优化：
+1.判断区域那块，可以根据bound迅速地排除大部分不需要判断的点，只判断在bound内的点
+2.其他的优化和shp_trans_coord下的差不多
+"""
 import numpy as np
 from shapely.geometry import Point, Polygon
 from netCDF4 import Dataset

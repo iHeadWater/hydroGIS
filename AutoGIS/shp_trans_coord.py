@@ -1,22 +1,40 @@
-"""首先读取shapefile文件，然后对每个polygon的每个坐标点进行坐标变换，接着再重新构建一个个的shapefile"""
+"""首先读取shapefile文件，然后对每个polygon的每个坐标点进行坐标变换，接着再重新构建一个个的shapefile
+程序需要优化，几个方面：
+1.把能放到循环外的都放到循环外处理
+2.for循环用更贴近C的map等代替
+3.查查有没有直接转换一组点坐标的方法
+4.并行计算算法
+5.把shapefile在arcgis上拆解后，多找几个电脑算
+6.重新用arcgis弄
+"""
 import os
+import time
+import numpy as np
+import pandas as pd
 import geopandas as gpd
 from shapely.geometry import Polygon
 from pyproj import CRS
-from pyproj import Transformer
+from pyproj import Proj, transform
 
 
-def trans_point(from_crs, to_crs, xy_coord):
-    """根据给定的crs，转换给定给的点坐标
+def trans_points(from_crs, to_crs, pxs, pys):
+    """不要循环处理，放入到dataframe中可以极大地提高速度，那完全不是一个量级的
     :param
-    xy_coord-- tuple, length is 2
+    pxs: 各点的x坐标组成的list的array
+    pys: 各点的y坐标组成的list的array
+    :return
+    pxys_out: x和y两两值组成的list，可用于初始化一个polygon
     """
-    transformer = Transformer.from_crs(from_crs, to_crs, always_xy=True)
-    x_coord = xy_coord[0]
-    y_coord = xy_coord[1]
-    x_out, y_out = transformer.transform(x_coord, y_coord)
-    xy_out = (x_out, y_out)
-    return xy_out
+    df = pd.DataFrame({'x': pxs, 'y': pys})
+    start = time.time()
+    df['x2'], df['y2'] = transform(from_crs, to_crs, df['x'].tolist(), df['y'].tolist())
+    end = time.time()
+    print('%.7f' % (end - start))
+    # 坐标转换完成后，将x2, y2数据取出，首先转为numpy数组，然后转置，然后每行一个坐标放入list中即可
+    arr_x = df['x2'].values
+    arr_y = df['y2'].values
+    pxys_out = np.stack((arr_x, arr_y), 0).T
+    return pxys_out
 
 
 def trans_polygon(from_crs, to_crs, polygon_from):
@@ -25,30 +43,23 @@ def trans_polygon(from_crs, to_crs, polygon_from):
     # 多边形外边界的各点坐标list里面是tuple
     boundary = polygon_from.boundary
     if len(boundary) == 1:
-        pxys = list(polygon_from.exterior.coords)
-        pxys_out = []
-        # 循环处理各个坐标
-        for pxy in pxys:
-            xy_out = trans_point(from_crs, to_crs, pxy)
-            pxys_out.append(xy_out)
+        pxs = polygon_from.exterior.xy[0]
+        pys = polygon_from.exterior.xy[1]
+        pxys_out = trans_points(from_crs, to_crs, pxs, pys)
         polygon_to = Polygon(pxys_out)
     elif len(boundary) >= 2:
         # 如果polygon有内部边界，则还需要将内部边界各点坐标也进行转换，然后后面再将内外部边界一起给到一个新的polygon，注意内部边界有可能有多个
-        exts = boundary[0].xy
-        pxys_ext = []
-        for px_ext, py_ext in zip(exts[0], exts[1]):
-            pxy_ext = (px_ext, py_ext)
-            xy_ext = trans_point(from_crs, to_crs, pxy_ext)
-            pxys_ext.append(xy_ext)
+        exts_x = boundary[0].xy[0]
+        exts_y = boundary[0].xy[1]
+        pxys_ext = trans_points(from_crs, to_crs, exts_x, exts_y)
+
         pxys_ints = []
         for i in range(1, len(boundary)):
-            ints = boundary[i].xy
-            pxys_int = []
-            for px_int, py_int in zip(ints[0], ints[1]):
-                pxy_int = (px_int, py_int)
-                xy_int = trans_point(from_crs, to_crs, pxy_int)
-                pxys_int.append(xy_int)
+            ints_x = boundary[i].xy[0]
+            ints_y = boundary[i].xy[1]
+            pxys_int = trans_points(from_crs, to_crs, ints_x, ints_y)
             pxys_ints.append(pxys_int)
+
         polygon_to = Polygon(shell=pxys_ext, holes=pxys_ints)
     else:
         print("error")
@@ -75,7 +86,7 @@ def trans_shp_coord(input_folder, input_shp_file, output_folder,
     crs_final = CRS.from_proj4(output_crs_proj4_str)
     all_columns = data.columns.values  # ndarray type
     new_datas = []
-    for i in range(1, data.shape[0]):
+    for i in range(1, 2):  # data.shape[0]
         print("生成第 ", i, " 个流域的shapefile:")
         newdata = gpd.GeoDataFrame()
         for column in all_columns:
