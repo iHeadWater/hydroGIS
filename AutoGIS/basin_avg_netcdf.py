@@ -2,21 +2,18 @@
 import numpy as np
 from shapely.geometry import Point, Polygon
 from netCDF4 import Dataset
+import os
+import geopandas as gpd
 
 
-def read_netcdf(file_path):
-    """读取netcdf，返回坐标"""
-    data_netcdf = Dataset(file_path, 'r')  # reads the netCDF file
-    return data_netcdf.dimensions['x'], data_netcdf.dimensions['y']
-
-
-def create_mask(poly, xs, ys):
-    """根据只有一个Polygon的shapefile和一个netcdf文件的所有坐标，生成该shapefile对应的mask。用xy坐标或经纬度都可以，先用xy测试下
+def create_mask(poly, lons, lats):
+    """根据只有一个Polygon的shapefile和一个netcdf文件的所有坐标，生成该shapefile对应的mask。用xy坐标或经纬度都可以，先用经纬度测试下
        因为netcdf代表的空间太大，所以为了计算较快，直接生成索引比较合适，即取netcdf的变量中的合适点的index"""
     mask_index = []
-    for i in len(xs):
-        if (is_point_in_boundary(xs[i], ys[i], poly)):
-            mask_index.append(i)
+    for i in range(lons.shape[0]):
+        for j in range(lons.shape[1]):
+            if is_point_in_boundary(lons[i][j], lats[i][j], poly):
+                mask_index.append((i, j))
     return mask_index
 
 
@@ -29,11 +26,44 @@ def is_point_in_boundary(px, py, poly):
     return point.within(poly)
 
 
-def calc_avg(mask, daymet_ds):
-    """有了mask之后，就可以直接取对应位置的数据了"""
-    average_precipitation = 0
-    tmax = daymet_ds.variables['tmax'][:]
+def calc_avg(mask, netcdf_data, var_type):
+    """有了mask之后，就可以直接取对应位置的数据了，mask是一个包含二维tuple的list"""
+    # var_data是一个三维的数组，要看看var_data的时间变量是第几个维度，利用mask的数据搜索另外两维
+    var_data = netcdf_data.variables[var_type][:]
     # 直接numpy指定位置处的数据求平均
-    tmax_chosen = tmax[mask]
-    tmax_JJA_mean_comp = np.mean(tmax_chosen, axis=0, keepdims=True)
-    return tmax_JJA_mean_comp
+    mask = np.array(mask)
+    index = mask.T
+    data_chosen = var_data[0][index[0], index[1]]
+    data_mean = np.mean(data_chosen, axis=0)
+    return data_mean
+
+
+# 先读取一个netcdf文件，然后把shapefile选择一张，先测试下上面的程序。
+# Define path to folder，以r开头表示相对路径
+input_folder = r"examples_data"
+
+# Join folder path and filename
+netcdf_file = "daymet_v3_prcp_1980_na.nc4"
+
+file_path = os.path.join(input_folder, netcdf_file)
+
+data_netcdf = Dataset(file_path, 'r')  # reads the netCDF file
+
+shp_file = os.path.join(input_folder, "03144816.shp")
+
+# crs_final_str = '+proj=lcc +lat_1=25 +lat_2=60 +lat_0=42.5 +lon_0=-100 +x_0=0 +y_0=0 +datum=WGS84 +units=m +no_defs'
+crs_final_str = '+proj=longlat +datum=WGS84 +no_defs'
+
+# 先选择一个shpfile
+new_shps = gpd.read_file(shp_file)
+
+lons = data_netcdf.variables['lon'][:]
+lats = data_netcdf.variables['lat'][:]
+polygon = new_shps.at[0, 'geometry']
+mask = create_mask(polygon, lons, lats)
+
+var_types = ['prcp']
+# var_types = ['tmax', 'tmin', 'prcp', 'srad', 'vp', 'swe', 'dayl']
+
+for var_type in var_types:
+    avg = calc_avg(mask, data_netcdf, var_type)
