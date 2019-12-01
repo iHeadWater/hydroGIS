@@ -14,6 +14,9 @@ def create_mask(poly, lons, lats):
     """根据只有一个Polygon的shapefile和一个netcdf文件的所有坐标，生成该shapefile对应的mask。用xy坐标或经纬度都可以，先用经纬度测试下
        因为netcdf代表的空间太大，所以为了计算较快，直接生成索引比较合适，即取netcdf的变量中的合适点的index"""
     mask_index = []
+    # 首先想办法减少循环的范围，然后在循环内使用map实现快速循环，现在思路是这样的：
+    # 1.首先对poly的中心进行判断，利用二分法，尽快地找到索引号，经纬度分开查，这样一下数量就降下来了。
+    # 2.然后再对poly用bound判断范围，再在这个范围内寻找即可。
     for i in range(lons.shape[0]):
         for j in range(lons.shape[1]):
             if is_point_in_boundary(lons[i][j], lats[i][j], poly):
