@@ -9,16 +9,37 @@ from netCDF4 import Dataset
 import os
 import geopandas as gpd
 
+from pyproj import CRS
+from pyproj import transform
 
-def create_mask(poly, lons, lats):
+
+def nearest_point_index(crs_from, crs_to, lon, lat, xs, ys):
+    # x和y是投影坐标，lon, lat需要先转换一下，注意x是代表经度投影，y是纬度投影
+    x, y = transform(crs_from, crs_to, lon, lat)
+    index_x = (np.abs(xs - x)).argmin()
+    index_y = (np.abs(ys - y)).argmin()
+    return [index_x, index_y]
+
+
+def create_mask(poly, xs, ys, lons, lats, crs_from, crs_to):
     """根据只有一个Polygon的shapefile和一个netcdf文件的所有坐标，生成该shapefile对应的mask。用xy坐标或经纬度都可以，先用经纬度测试下
        因为netcdf代表的空间太大，所以为了计算较快，直接生成索引比较合适，即取netcdf的变量中的合适点的index"""
     mask_index = []
     # 首先想办法减少循环的范围，然后在循环内使用map实现快速循环，现在思路是这样的：
-    # 1.首先对poly的中心进行判断，利用二分法，尽快地找到索引号，经纬度分开查，这样一下数量就降下来了。
-    # 2.然后再对poly用bound判断范围，再在这个范围内寻找即可。
-    for i in range(lons.shape[0]):
-        for j in range(lons.shape[1]):
+    # 每行选出一个最接近的index组成一个INDEX集合，首先读取bound的范围，转换到x和y上判断范围
+    poly_bound = poly.bounds
+    poly_bound_min_lat = poly_bound[1]
+    poly_bound_min_lon = poly_bound[0]
+    poly_bound_max_lat = poly_bound[3]
+    poly_bound_max_lon = poly_bound[2]
+    index_min = nearest_point_index(crs_from, crs_to, poly_bound_min_lon, poly_bound_min_lat, xs, ys)
+    index_max = nearest_point_index(crs_from, crs_to, poly_bound_max_lon, poly_bound_max_lat, xs, ys)
+    # 注意y是倒序的
+    range_x = [index_min[0], index_max[0]]
+    range_y = [index_max[1], index_min[1]]
+    # 注意在nc文件中，lat和lon的坐标都是(y,x)range_y[1] + 1
+    for i in range(range_y[0], range_y[1] + 1):
+        for j in range(range_x[0], range_x[1] + 1):
             if is_point_in_boundary(lons[i][j], lats[i][j], poly):
                 mask_index.append((i, j))
     return mask_index
@@ -51,23 +72,44 @@ input_folder = r"examples_data"
 
 # Join folder path and filename
 netcdf_file = "daymet_v3_prcp_1980_na.nc4"
-
 file_path = os.path.join(input_folder, netcdf_file)
-
 data_netcdf = Dataset(file_path, 'r')  # reads the netCDF file
+# 看看netcdf的格式具体是什么样的，便于后面判断坐标之间的空间关系
+print(data_netcdf)
+print(data_netcdf.variables.keys())  # get all variable names
+temp_lat = data_netcdf.variables['lat']  # temperature variable
+print(temp_lat)
+temp_lon = data_netcdf.variables['lon']  # temperature variable
+print(temp_lon)
+for d in data_netcdf.dimensions.items():
+    print(d)
+x, y = data_netcdf.variables['x'], data_netcdf.variables['y']
+print(x)
+print(y)
+# x，y是其他变量的坐标：lat(y,x), lon(y,x), prcp(time,y,x)。所以先看看x和y的数据的规律
+x = data_netcdf.variables['x'][:]
+y = data_netcdf.variables['y'][:]
+# 判断x和y是否递增,x是递增的，y是递减的
+lx = list(x)
+ly = list(y)
+print(all(ix < jx for ix, jx in zip(lx, lx[1:])))
+print(all(iy > jy for iy, jy in zip(ly, ly[1:])))
+lons = data_netcdf.variables['lon'][:]
+lats = data_netcdf.variables['lat'][:]
 
 shp_file = os.path.join(input_folder, "03144816.shp")
-
-# crs_final_str = '+proj=lcc +lat_1=25 +lat_2=60 +lat_0=42.5 +lon_0=-100 +x_0=0 +y_0=0 +datum=WGS84 +units=m +no_defs'
-crs_final_str = '+proj=longlat +datum=WGS84 +no_defs'
+# 投影坐标系
+crs_pro_str = '+proj=lcc +lat_1=25 +lat_2=60 +lat_0=42.5 +lon_0=-100 +x_0=0 +y_0=0 +datum=WGS84 +units=m +no_defs'
+# 地理坐标系
+crs_geo_str = '+proj=longlat +datum=WGS84 +no_defs'
+crs_from = CRS.from_proj4(crs_geo_str)
+crs_to = CRS.from_proj4(crs_pro_str)
 
 # 先选择一个shpfile
 new_shps = gpd.read_file(shp_file)
-
-lons = data_netcdf.variables['lon'][:]
-lats = data_netcdf.variables['lat'][:]
 polygon = new_shps.at[0, 'geometry']
-mask = create_mask(polygon, lons, lats)
+
+mask = create_mask(polygon, x, y, lons, lats, crs_from, crs_to)
 
 var_types = ['prcp']
 # var_types = ['tmax', 'tmin', 'prcp', 'srad', 'vp', 'swe', 'dayl']
