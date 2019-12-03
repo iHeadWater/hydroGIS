@@ -42,12 +42,14 @@ def trans_polygon(from_crs, to_crs, polygon_from):
     polygon_to = Polygon()
     # 多边形外边界的各点坐标list里面是tuple
     boundary = polygon_from.boundary
-    if len(boundary) == 1:
+    boundary_type = boundary.geom_type
+    print(boundary_type)
+    if boundary_type == 'LineString':
         pxs = polygon_from.exterior.xy[0]
         pys = polygon_from.exterior.xy[1]
         pxys_out = trans_points(from_crs, to_crs, pxs, pys)
         polygon_to = Polygon(pxys_out)
-    elif len(boundary) >= 2:
+    elif boundary_type == 'MultiLineString':
         # 如果polygon有内部边界，则还需要将内部边界各点坐标也进行转换，然后后面再将内外部边界一起给到一个新的polygon，注意内部边界有可能有多个
         exts_x = boundary[0].xy[0]
         exts_y = boundary[0].xy[1]
@@ -62,7 +64,7 @@ def trans_polygon(from_crs, to_crs, polygon_from):
 
         polygon_to = Polygon(shell=pxys_ext, holes=pxys_ints)
     else:
-        print("error")
+        print("error!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
 
     return polygon_to
 
@@ -86,7 +88,8 @@ def trans_shp_coord(input_folder, input_shp_file, output_folder,
     crs_final = CRS.from_proj4(output_crs_proj4_str)
     all_columns = data.columns.values  # ndarray type
     new_datas = []
-    for i in range(1, 2):  # data.shape[0]
+    start = time.time()
+    for i in range(2, 3):  # data.shape[0]
         print("生成第 ", i, " 个流域的shapefile:")
         newdata = gpd.GeoDataFrame()
         for column in all_columns:
@@ -107,6 +110,8 @@ def trans_shp_coord(input_folder, input_shp_file, output_folder,
         print("坐标系: ", newdata.crs)
         new_datas.append(newdata)
         write_shpfile(newdata, output_folder)
+    end = time.time()
+    print('计算耗时：', '%.7f' % (end - start))
     return new_datas
 
 

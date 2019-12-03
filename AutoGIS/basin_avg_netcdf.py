@@ -3,6 +3,8 @@
 1.判断区域那块，可以根据bound迅速地排除大部分不需要判断的点，只判断在bound内的点
 2.其他的优化和shp_trans_coord下的差不多
 """
+import time
+
 import numpy as np
 from shapely.geometry import Point, Polygon
 from netCDF4 import Dataset
@@ -56,14 +58,23 @@ def is_point_in_boundary(px, py, poly):
 
 def calc_avg(mask, netcdf_data, var_type):
     """有了mask之后，就可以直接取对应位置的数据了，mask是一个包含二维tuple的list"""
-    # var_data是一个三维的数组，要看看var_data的时间变量是第几个维度，利用mask的数据搜索另外两维
-    var_data = netcdf_data.variables[var_type][:]
-    # 直接numpy指定位置处的数据求平均
+
+    # var_data是一个三维的数组，var_data的时间变量是第1个维度，利用mask的数据搜索另外两维，一次性读取数据量太大，无法读入，因此要对时间循环，循环后直接根据索引取数据
+    # 数据的索引花的时间太久，感觉必须要在下载数据时就先按照范围把数据下载好，然后再来生成mask，或者用matlab看看读取速度会不会较快
     mask = np.array(mask)
     index = mask.T
-    data_chosen = var_data[0][index[0], index[1]]
-    data_mean = np.mean(data_chosen, axis=0)
-    return data_mean
+
+    def f_avg(i):
+        data_day = netcdf_data.variables[var_type][i]
+        data_chosen = data_day[index[0], index[1]]
+        # 直接numpy指定位置处的数据求平均
+        data_mean = np.mean(data_chosen, axis=0)
+        return data_mean
+
+    # 使用map循环
+    all_mean_data = list(map(f_avg, range(365)))
+
+    return all_mean_data
 
 
 # 先读取一个netcdf文件，然后把shapefile选择一张，先测试下上面的程序。
@@ -108,11 +119,17 @@ crs_to = CRS.from_proj4(crs_pro_str)
 # 先选择一个shpfile
 new_shps = gpd.read_file(shp_file)
 polygon = new_shps.at[0, 'geometry']
-
+start = time.time()
 mask = create_mask(polygon, x, y, lons, lats, crs_from, crs_to)
-
+end = time.time()
+print('生成mask耗时：', '%.7f' % (end - start))
+print(np.array(mask))
 var_types = ['prcp']
 # var_types = ['tmax', 'tmin', 'prcp', 'srad', 'vp', 'swe', 'dayl']
 
 for var_type in var_types:
+    start = time.time()
     avg = calc_avg(mask, data_netcdf, var_type)
+    end = time.time()
+    print('计算耗时：', '%.7f' % (end - start))
+    print('平均值：', avg)
