@@ -81,6 +81,8 @@ conda install geopandas -c conda-forge
 conda install -c conda-forge geoplot
 # upgrade pyproj
 conda update pyproj -c conda-forge
+# install geojson
+conda install -c conda-forge geojson
 ```
 
 ### Ubuntu 18.04下安装
