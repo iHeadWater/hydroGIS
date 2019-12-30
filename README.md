@@ -1,5 +1,5 @@
 # hydroGIS
-practices for gis(mainly ArcGIS) in hydrology 
+practices for gis in hydrology 
 
 水文水资源的科研和工程实践中一定缺不了GIS工具的使用，熟悉一些常用GIS工具十分有必要，这里记录平时一些实践，以备后用。GIS相关资源可参考：[awesome-gis](https://github.com/sshuair/awesome-gis)。
 
