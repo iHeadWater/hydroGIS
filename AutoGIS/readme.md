@@ -87,18 +87,37 @@ conda install -c conda-forge geojson
 
 ### Ubuntu 18.04下安装
 
-在Ubuntu18.04下按照上述方式安装后，import geopandas报错了，可能是由于conda下安装的版本，fiona和geopandas的版本不匹配，因此直接用conda uninstall 将其卸载，并重新用pip install 安装了，再导入发现没有错误了。然后卸载的时候好像也把geoplot卸载了，所以也重新再用pip安装一次。总之使用下面的pip也可以轻松安装好geopandas，和geoplot
+在Ubuntu18.04下按照上述方式安装后，import geopandas报错了，可能是由于conda下安装的版本，fiona和geopandas的版本不匹配，因此直接用conda uninstall 将其卸载，并重新用pip install 安装了，再导入发现没有错误了。然后卸载的时候好像也把geoplot卸载了，所以也重新再用pip安装一次。总之使用下面的pip也可以轻松安装好geopandas，和geoplot。也可以使用pipenv安装，如果指定了虚拟环境，就还是用pipenv安装较好。
 
-```python
+```Shell
 #  如果用conda安装了，就把geopandas卸载了
 conda uninstall geopandas
 # 安装
 pip install geopandas
 pip install geoplot
 ```
+或
+```Shell
+pipenv install geopandas
+```
 
-安装pyproj，见pyproj文件夹下内容。可能已经安装，但是需要更新。
 
-``` python
+一点补充：
+
+如果本来就已经安装了pyproj，可能需要更新。
+
+``` Shell
 pip install --upgrade pyproj
+```
+
+如果在代码中需要使用到rtree库，比如调用overlay函数或者sjoin函数等空间分析函数，如果没有安装rtree，那么在ubuntu下允许这些空间分析函数会报错。所以需要手动补充安装一些库。根据参考：[Overly Function from GeoPandas Not Working
+](https://stackoverflow.com/questions/53546775/overly-function-from-geopandas-not-working)所说，因为rtree是C library libspatialindex的wrapper。因此，需要先安装好 libspatialindex C library. 再安装rtree python库。具体代码如下：
+
+```Shell
+sudo apt-get update
+sudo apt-get install libspatialindex-dev
+```
+
+```Shell
+pip install rtree
 ```

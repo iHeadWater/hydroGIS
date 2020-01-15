@@ -89,7 +89,7 @@ def trans_shp_coord(input_folder, input_shp_file, output_folder,
     all_columns = data.columns.values  # ndarray type
     new_datas = []
     start = time.time()
-    for i in range(2, 3):  # data.shape[0]
+    for i in range(0, data.shape[0]):  # data.shape[0]
         print("生成第 ", i, " 个流域的shapefile:")
         newdata = gpd.GeoDataFrame()
         for column in all_columns:
@@ -99,17 +99,17 @@ def trans_shp_coord(input_folder, input_shp_file, output_folder,
                 polygon_from = data.iloc[i, :]['geometry']
                 polygon_to = trans_polygon(crs_proj4, crs_final, polygon_from)
                 # 要赋值到newdata的i位置上，否则就成为geoseries了，无法导出到shapefile
-                newdata.at[i, 'geometry'] = polygon_to
-                print(type(newdata.at[i, 'geometry']))
+                newdata.at[0, column] = polygon_to
+                print(type(newdata.at[0, column]))
             else:
-                newdata.at[i, column] = data.iloc[i, :][column]
+                newdata.at[0, column] = data.iloc[i, :][column]
         print("转换该流域的坐标完成！")
         print(newdata)
         # 貌似必须转到wkt才能用来创建shapefile
         newdata.crs = crs_final.to_wkt()
         print("坐标系: ", newdata.crs)
-        new_datas.append(newdata)
         write_shpfile(newdata, output_folder)
+        new_datas.append(newdata)
     end = time.time()
     print('计算耗时：', '%.7f' % (end - start))
     return new_datas
