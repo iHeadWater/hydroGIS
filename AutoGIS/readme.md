@@ -96,11 +96,6 @@ conda uninstall geopandas
 pip install geopandas
 pip install geoplot
 ```
-或
-```Shell
-pipenv install geopandas
-```
-
 
 一点补充：
 
@@ -120,4 +115,10 @@ sudo apt-get install libspatialindex-dev
 
 ```Shell
 pip install rtree
+```
+
+安装 mplleaflet 库：
+
+```Shell
+conda install -c conda-forge mplleaflet
 ```
