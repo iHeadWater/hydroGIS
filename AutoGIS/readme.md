@@ -64,7 +64,7 @@
     
 ## 安装库
 
-这里主要给出conda环境下的安装，也尝试了直接使用pip的安装方式，个人建议以conda为主。
+这里主要给出conda环境下的安装，也尝试了直接使用pip的安装方式，个人建议以conda为主，并且安装到独立虚拟环境中较好。
 
 ### conda environment安装
 
@@ -73,19 +73,29 @@
 安装geopandas只要执行下面的程序即可：
 
 ``` Shell
+# 虚拟环境中安装
+conda create --prefix ./envs python=3.7
+# 激活虚拟环境，xxx表示文件夹的前缀：
+conda activate xxx\hydroGIS\envs
+# 如果需要独立的jupyter lab，安装：
+conda install -c conda-forge jupyterlab
 conda install geopandas -c conda-forge
+# 在geopandas中绘图需要geoplot包
+conda install -c conda-forge geoplot
+conda install -c conda-forge mplleaflet
+conda install -c conda-forge folium
+conda install -c conda-forge osmnx
 ```
 
-在geopandas中绘图需要geoplot包，因此安装：
+最后导出环境文件：
 
-``` Shell
-# Install geoplot
-conda install -c conda-forge geoplot
+```Shell
+conda env export > environment.yml
 ```
 
 ### pip安装
 
-pip的安装只在Ubuntu18.04下尝试了，因此以下内容是Ubuntu18.04下的。用pip install 可以直接安好geopandas，geoplot等。也可以使用pipenv安装，如果使用了pipenv指定虚拟环境，就还是用pipenv安装较好。
+pip的安装是一开始在Ubuntu18.04下尝试在base环境下安装的，不建议使用。用pip install 可以直接安好geopandas，geoplot等。也可以使用pipenv安装，如果使用了pipenv指定虚拟环境，就还是用pipenv安装较好。
 
 ```Shell
 pip install geopandas
