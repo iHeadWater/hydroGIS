@@ -6,7 +6,7 @@ Practices for gis in hydrology
 
 结合awesome-gis的目录，目前个人比较常见的工具有：
 
-- GIS软件：**ArcGIS**
+- GIS软件：**ArcGIS**, **QGIS**
 - 遥感软件：ENVI
 - 3D应用：－
 - 地图服务：－

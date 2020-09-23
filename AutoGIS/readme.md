@@ -85,6 +85,10 @@ conda install -c conda-forge geoplot
 conda install -c conda-forge mplleaflet
 conda install -c conda-forge folium
 conda install -c conda-forge osmnx
+# 有一些例子会用到一些地球科学数据，因此使用earthpy包
+conda install -c conda-forge earthpy
+conda install -c conda-forge pycrs
+conda install -c conda-forge rasterstats
 ```
 
 最后导出环境文件：
@@ -95,7 +99,7 @@ conda env export > environment.yml
 
 ### pip安装
 
-pip的安装是一开始在Ubuntu18.04下尝试在base环境下安装的，不建议使用。用pip install 可以直接安好geopandas，geoplot等。也可以使用pipenv安装，如果使用了pipenv指定虚拟环境，就还是用pipenv安装较好。
+pip是纯粹的python安装，所以有些其他依赖可能需要额外处理，因此并**不建议使用**，这里只列出一些本人尝试了的一些包，并不全。用pip install 可以直接安好geopandas，geoplot等。也可以使用pipenv安装，如果使用了pipenv指定虚拟环境，就还是用pipenv安装较好。
 
 ```Shell
 pip install geopandas
