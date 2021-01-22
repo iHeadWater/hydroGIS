@@ -64,37 +64,14 @@
     
 ## 安装库
 
-这里主要给出conda环境下的安装，也尝试了直接使用pip的安装方式，个人建议以conda为主，并且安装到独立虚拟环境中较好。
+这里主要给出conda环境下的安装，也尝试了直接使用pip的安装方式，个人建议以conda为主，并且安装到独立虚拟环境中较好，conda环境参考了：https://github.com/earthlab/earth-analytics-python-env/blob/main/environment.yml 。
 
 ### conda environment安装
 
-许多GIS包来自conda的一个特定channel－－conda-forge。一开始先安装geopandas即可，后面再在需要的时候安装所需，这是因为安装geopandas的时候会自动地安装一些基础GIS包，比如Shapely和fiona。
-
-安装geopandas只要执行下面的程序即可：
-
-``` Shell
-# 虚拟环境中安装
-conda create --prefix ./envs python=3.7
-# 激活虚拟环境，xxx表示文件夹的前缀：
-conda activate xxx\hydroGIS\envs
-# 如果需要独立的jupyter lab，安装：
-conda install -c conda-forge jupyterlab
-conda install geopandas -c conda-forge
-# 在geopandas中绘图需要geoplot包
-conda install -c conda-forge geoplot
-conda install -c conda-forge mplleaflet
-conda install -c conda-forge folium
-conda install -c conda-forge osmnx
-# 有一些例子会用到一些地球科学数据，因此使用earthpy包
-conda install -c conda-forge earthpy
-conda install -c conda-forge pycrs
-conda install -c conda-forge rasterstats
-```
-
-最后导出环境文件：
+安装只要在repo的根目录下终端中执行下面的程序即可：
 
 ```Shell
-conda env export > environment.yml
+conda env create -f environment.yml
 ```
 
 ### pip安装
