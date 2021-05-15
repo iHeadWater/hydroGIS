@@ -4,77 +4,17 @@ channels:
   - defaults
 dependencies:
   - python=3.8
-  - pip
-  - click
-  - colour
-  - mss
-  - pillow
-  # Core scientific python
-  - numpy
-  - kiwisolver
 
   # Spatial packages
-  - rasterio
-  - pysal
-  - pyshp
-  - pyproj
-  - rasterstats
+  - geopandas  
   - geopy
-  - geopandas
-  - descartes
-  - contextily
-  - earthpy=0.9.2
   - geojson
-  - hydrofunctions
-  - geocoder
-  - tweepy
-  - xarray
-  - rioxarray
-  - scipy
-  - netcdf4
-  - nc-time-axis
-  - regionmask
-  - pycrs
-  - earthengine-api>=0.1.230
-  - geeadd>=0.5.1
-  - whitebox
-  - geemap
-  
-  # Visualization
-  - matplotlib
-  - pyqt
-  - seaborn
-  - tqdm
-  - bqplot
-  - cartopy
-  - mapboxgl
-  - geoplot
-  - mplleaflet
-  - folium>=0.11.0
+  - mapclassify>=2.2.0
+  - contextily
   - osmnx
-  - ffmpeg-python
-  - voila
-  
-  # Natural language processing
-  - nltk
-  - textblob
+  - rasterstats
+  - xarray-spatial
+  - geemap
 
   # Jupyter Environment
-  - papermill
-  - autopep8
   - jupyterlab
-  - notebook
-  - ipython
-  - jupyter_contrib_nbextensions
-  - nbclean
-  - nbresuse
-  - ipyevents
-  - ipyfilechooser
-  - ipyleaflet>=0.13.3
-  - ipynb-py-convert
-  - ipytree
-  
-  # Autograding
-  - matplotcheck>=0.1.2
-  - nbgrader
-

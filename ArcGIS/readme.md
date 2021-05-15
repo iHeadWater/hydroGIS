@@ -7,3 +7,5 @@ ArcGIS是GIS领域最强大的软件，它有很多不同的组成部分，根�
 - *ArcGIS Online*则是一个Esri公司提供的SaaS，可以在其上制作地图，分析数据，share和协作来自全球ArcGIS社区的应用，地图和数据。根据笔记[ArcGIS for Developers简介](arcgis4developers.md)，就目前来看，空间分析等常用功能可能还是不便于在其上开展。
 
 综上所述，作为一个水文水资源ArcGIS重度应用者，基本围绕ArcGIS Desktop使用即可，可以尝试下ArcGIS Pro，Enterprise可以不用care，ArcGIS Online则可以尝尝鲜，看看与其配套使用的ArcGIS for Developers有没有新鲜功能，总之，主要还是在ArcGIS Desktop + 利用python2 脚本自动化流程方面着重留意。因此，本文件夹下的笔记以ArcGIS Desktop实践应用为主。
+
+更多关于ArcGIS使用的教程可以参考：[Advanced Python Programming for GIS - Summer 2020](https://www.e-education.psu.edu/geog489/syllabus)

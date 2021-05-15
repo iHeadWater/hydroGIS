@@ -103,7 +103,16 @@ venv.bak/
 # mypy
 .mypy_cache/
 
-/AutoGIS/examples_data/
 .idea/
 envs
+/AutoGIS/cache
+/AutoGIS/data
+/AutoGIS/dataE5
+/AutoGIS/dask-worker-space
+/AutoGIS/examples_data/
+/AutoGIS/L2_data
+/AutoGIS/L4_data
 /AutoGIS/L5_data
+/AutoGIS/ospy_data1
+/AutoGIS/ospy3_data
+/AutoGIS/ospy_data4
