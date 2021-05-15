@@ -16,6 +16,7 @@ dependencies:
   # Spatial packages
   - rasterio
   - pysal
+  - pointpats
   - pyshp
   - pyproj
   - rasterstats
