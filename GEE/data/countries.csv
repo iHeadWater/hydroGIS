@@ -1,0 +1,177 @@
+system:index,GDP_MD_EST,ISO_A2,ISO_A3,POP_RANK,CONTINENT,INCOME_GRP,POP_EST,SUBREGION,NAME
+0,8374,FJ,FJI,11,Oceania,4. Lower middle income,920938,Melanesia,Fiji
+1,150600,TZ,TZA,16,Africa,5. Low income,53950935,Eastern Africa,Tanzania
+2,906.5,EH,ESH,11,Africa,5. Low income,603253,Northern Africa,W. Sahara
+3,1674000,CA,CAN,15,North America,1. High income: OECD,35623680,Northern America,Canada
+4,18560000,US,USA,17,North America,1. High income: OECD,326625791,Northern America,United States of America
+5,460700,KZ,KAZ,14,Asia,3. Upper middle income,18556698,Central Asia,Kazakhstan
+6,202300,UZ,UZB,15,Asia,4. Lower middle income,29748859,Central Asia,Uzbekistan
+7,28020,PG,PNG,13,Oceania,4. Lower middle income,6909701,Melanesia,Papua New Guinea
+8,3028000,ID,IDN,17,Asia,4. Lower middle income,260580739,South-Eastern Asia,Indonesia
+9,879400,AR,ARG,15,South America,3. Upper middle income,44293293,South America,Argentina
+10,436100,CL,CHL,14,South America,3. Upper middle income,17789267,South America,Chile
+11,66010,CD,COD,16,Africa,5. Low income,83301151,Middle Africa,Dem. Rep. Congo
+12,4719,SO,SOM,13,Africa,5. Low income,7531386,Eastern Africa,Somalia
+13,152700,KE,KEN,15,Africa,5. Low income,47615739,Eastern Africa,Kenya
+14,176300,SD,SDN,15,Africa,4. Lower middle income,37345935,Northern Africa,Sudan
+15,30590,TD,TCD,14,Africa,5. Low income,12075985,Middle Africa,Chad
+16,19340,HT,HTI,14,North America,5. Low income,10646714,Caribbean,Haiti
+17,161900,DO,DOM,14,North America,3. Upper middle income,10734247,Caribbean,Dominican Rep.
+18,3745000,RU,RUS,17,Europe,3. Upper middle income,142257519,Eastern Europe,Russia
+19,9066,BS,BHS,10,North America,2. High income: nonOECD,329988,Caribbean,Bahamas
+20,281.8,FK,FLK,4,South America,1. High income: OECD,2931,South America,Falkland Is.
+21,364700,NO,NOR,13,Europe,1. High income: OECD,5320045,Northern Europe,Norway
+22,2173,GL,GRL,8,North America,2. High income: nonOECD,57713,Northern America,Greenland
+23,16,TF,ATF,1,Seven seas (open ocean),2. High income: nonOECD,140,Seven seas (open ocean),Fr. S. Antarctic Lands
+24,4975,TL,TLS,12,Asia,4. Lower middle income,1291358,South-Eastern Asia,Timor-Leste
+25,739100,ZA,ZAF,16,Africa,3. Upper middle income,54841552,Southern Africa,South Africa
+26,6019,LS,LSO,12,Africa,4. Lower middle income,1958042,Southern Africa,Lesotho
+27,2307000,MX,MEX,17,North America,3. Upper middle income,124574795,Central America,Mexico
+28,73250,UY,URY,12,South America,3. Upper middle income,3360148,South America,Uruguay
+29,3081000,BR,BRA,17,South America,3. Upper middle income,207353391,South America,Brazil
+30,78350,BO,BOL,14,South America,4. Lower middle income,11138234,South America,Bolivia
+31,410400,PE,PER,15,South America,3. Upper middle income,31036656,South America,Peru
+32,688000,CO,COL,15,South America,3. Upper middle income,47698524,South America,Colombia
+33,93120,PA,PAN,12,North America,3. Upper middle income,3753142,Central America,Panama
+34,79260,CR,CRI,12,North America,3. Upper middle income,4930258,Central America,Costa Rica
+35,33550,NI,NIC,13,North America,4. Lower middle income,6025951,Central America,Nicaragua
+36,43190,HN,HND,13,North America,4. Lower middle income,9038741,Central America,Honduras
+37,54790,SV,SLV,13,North America,4. Lower middle income,6172011,Central America,El Salvador
+38,131800,GT,GTM,14,North America,4. Lower middle income,15460732,Central America,Guatemala
+39,3088,BZ,BLZ,10,North America,4. Lower middle income,360346,Central America,Belize
+40,468600,VE,VEN,15,South America,3. Upper middle income,31304016,South America,Venezuela
+41,6093,GY,GUY,11,South America,4. Lower middle income,737718,South America,Guyana
+42,8547,SR,SUR,11,South America,3. Upper middle income,591919,South America,Suriname
+43,2699000,FR,FRA,16,Europe,1. High income: OECD,67106161,Western Europe,France
+44,182400,EC,ECU,14,South America,3. Upper middle income,16290913,South America,Ecuador
+45,131000,PR,PRI,12,North America,2. High income: nonOECD,3351827,Caribbean,Puerto Rico
+46,25390,JM,JAM,12,North America,3. Upper middle income,2990561,Caribbean,Jamaica
+47,132900,CU,CUB,14,North America,3. Upper middle income,11147407,Caribbean,Cuba
+48,28330,ZW,ZWE,14,Africa,5. Low income,13805084,Eastern Africa,Zimbabwe
+49,35900,BW,BWA,12,Africa,3. Upper middle income,2214858,Southern Africa,Botswana
+50,25990,NA,NAM,12,Africa,3. Upper middle income,2484780,Southern Africa,Namibia
+51,39720,SN,SEN,14,Africa,4. Lower middle income,14668522,Western Africa,Senegal
+52,38090,ML,MLI,14,Africa,5. Low income,17885245,Western Africa,Mali
+53,16710,MR,MRT,12,Africa,5. Low income,3758571,Western Africa,Mauritania
+54,24310,BJ,BEN,14,Africa,5. Low income,11038805,Western Africa,Benin
+55,20150,NE,NER,14,Africa,5. Low income,19245344,Western Africa,Niger
+56,1089000,NG,NGA,17,Africa,4. Lower middle income,190632261,Western Africa,Nigeria
+57,77240,CM,CMR,15,Africa,4. Lower middle income,24994885,Middle Africa,Cameroon
+58,11610,TG,TGO,13,Africa,5. Low income,7965055,Western Africa,Togo
+59,120800,GH,GHA,15,Africa,4. Lower middle income,27499924,Western Africa,Ghana
+60,87120,CI,CIV,15,Africa,4. Lower middle income,24184810,Western Africa,Côte d'Ivoire
+61,16080,GN,GIN,14,Africa,5. Low income,12413867,Western Africa,Guinea
+62,2851,GW,GNB,12,Africa,5. Low income,1792338,Western Africa,Guinea-Bissau
+63,3881,LR,LBR,12,Africa,5. Low income,4689021,Western Africa,Liberia
+64,10640,SL,SLE,13,Africa,5. Low income,6163195,Western Africa,Sierra Leone
+65,32990,BF,BFA,15,Africa,5. Low income,20107509,Western Africa,Burkina Faso
+66,3206,CF,CAF,13,Africa,5. Low income,5625118,Middle Africa,Central African Rep.
+67,30270,CG,COG,12,Africa,4. Lower middle income,4954674,Middle Africa,Congo
+68,35980,GA,GAB,12,Africa,3. Upper middle income,1772255,Middle Africa,Gabon
+69,31770,GQ,GNQ,11,Africa,2. High income: nonOECD,778358,Middle Africa,Eq. Guinea
+70,65170,ZM,ZMB,14,Africa,4. Lower middle income,15972000,Eastern Africa,Zambia
+71,21200,MW,MWI,14,Africa,5. Low income,19196246,Eastern Africa,Malawi
+72,35010,MZ,MOZ,15,Africa,5. Low income,26573706,Eastern Africa,Mozambique
+73,11060,SZ,SWZ,12,Africa,4. Lower middle income,1467152,Southern Africa,eSwatini
+74,189000,AO,AGO,15,Africa,3. Upper middle income,29310273,Middle Africa,Angola
+75,7892,BI,BDI,14,Africa,5. Low income,11466756,Eastern Africa,Burundi
+76,297000,IL,ISR,13,Asia,1. High income: OECD,8299706,Western Asia,Israel
+77,85160,LB,LBN,13,Asia,3. Upper middle income,6229794,Western Asia,Lebanon
+78,36860,MG,MDG,15,Africa,5. Low income,25054161,Eastern Africa,Madagascar
+79,21220.77,PS,PSE,12,Asia,4. Lower middle income,4543126,Western Asia,Palestine
+80,3387,GM,GMB,12,Africa,5. Low income,2051363,Western Africa,Gambia
+81,130800,TN,TUN,14,Africa,3. Upper middle income,11403800,Northern Africa,Tunisia
+82,609400,DZ,DZA,15,Africa,3. Upper middle income,40969443,Northern Africa,Algeria
+83,86190,JO,JOR,14,Asia,3. Upper middle income,10248069,Western Asia,Jordan
+84,667200,AE,ARE,13,Asia,2. High income: nonOECD,6072475,Western Asia,United Arab Emirates
+85,334500,QA,QAT,12,Asia,2. High income: nonOECD,2314307,Western Asia,Qatar
+86,301100,KW,KWT,12,Asia,2. High income: nonOECD,2875422,Western Asia,Kuwait
+87,596700,IQ,IRQ,15,Asia,4. Lower middle income,39192111,Western Asia,Iraq
+88,173100,OM,OMN,12,Asia,2. High income: nonOECD,3424386,Western Asia,Oman
+89,723,VU,VUT,10,Oceania,4. Lower middle income,282814,Melanesia,Vanuatu
+90,58940,KH,KHM,14,Asia,5. Low income,16204486,South-Eastern Asia,Cambodia
+91,1161000,TH,THA,16,Asia,3. Upper middle income,68414135,South-Eastern Asia,Thailand
+92,40960,LA,LAO,13,Asia,4. Lower middle income,7126706,South-Eastern Asia,Laos
+93,311100,MM,MMR,16,Asia,5. Low income,55123814,South-Eastern Asia,Myanmar
+94,594900,VN,VNM,16,Asia,4. Lower middle income,96160163,South-Eastern Asia,Vietnam
+95,40000,KP,PRK,15,Asia,5. Low income,25248140,Eastern Asia,North Korea
+96,1929000,KR,KOR,16,Asia,1. High income: OECD,51181299,Eastern Asia,South Korea
+97,37000,MN,MNG,12,Asia,4. Lower middle income,3068243,Eastern Asia,Mongolia
+98,8721000,IN,IND,18,Asia,4. Lower middle income,1281935911,Southern Asia,India
+99,628400,BD,BGD,17,Asia,5. Low income,157826578,Southern Asia,Bangladesh
+100,6432,BT,BTN,11,Asia,4. Lower middle income,758288,Southern Asia,Bhutan
+101,71520,NP,NPL,15,Asia,5. Low income,29384297,Southern Asia,Nepal
+102,988200,PK,PAK,17,Asia,4. Lower middle income,204924861,Southern Asia,Pakistan
+103,64080,AF,AFG,15,Asia,5. Low income,34124811,Southern Asia,Afghanistan
+104,25810,TJ,TJK,13,Asia,5. Low income,8468555,Central Asia,Tajikistan
+105,21010,KG,KGZ,13,Asia,5. Low income,5789122,Central Asia,Kyrgyzstan
+106,94720,TM,TKM,13,Asia,3. Upper middle income,5351277,Central Asia,Turkmenistan
+107,1459000,IR,IRN,16,Asia,3. Upper middle income,82021564,Southern Asia,Iran
+108,50280,SY,SYR,14,Asia,4. Lower middle income,18028549,Western Asia,Syria
+109,26300,AM,ARM,12,Asia,4. Lower middle income,3045191,Western Asia,Armenia
+110,498100,SE,SWE,13,Europe,1. High income: OECD,9960487,Northern Europe,Sweden
+111,165400,BY,BLR,13,Europe,3. Upper middle income,9549747,Eastern Europe,Belarus
+112,352600,UA,UKR,15,Europe,4. Lower middle income,44033874,Eastern Europe,Ukraine
+113,1052000,PL,POL,15,Europe,1. High income: OECD,38476269,Eastern Europe,Poland
+114,416600,AT,AUT,13,Europe,1. High income: OECD,8754413,Western Europe,Austria
+115,267600,HU,HUN,13,Europe,1. High income: OECD,9850845,Eastern Europe,Hungary
+116,18540,MD,MDA,12,Europe,4. Lower middle income,3474121,Eastern Europe,Moldova
+117,441000,RO,ROU,15,Europe,3. Upper middle income,21529967,Eastern Europe,Romania
+118,85620,LT,LTU,12,Europe,3. Upper middle income,2823859,Northern Europe,Lithuania
+119,50650,LV,LVA,12,Europe,3. Upper middle income,1944643,Northern Europe,Latvia
+120,38700,EE,EST,12,Europe,1. High income: OECD,1251581,Northern Europe,Estonia
+121,3979000,DE,DEU,16,Europe,1. High income: OECD,80594017,Western Europe,Germany
+122,143100,BG,BGR,13,Europe,3. Upper middle income,7101510,Eastern Europe,Bulgaria
+123,290500,GR,GRC,14,Europe,1. High income: OECD,10768477,Southern Europe,Greece
+124,1670000,TR,TUR,16,Asia,3. Upper middle income,80845215,Western Asia,Turkey
+125,33900,AL,ALB,12,Europe,4. Lower middle income,3047987,Southern Europe,Albania
+126,94240,HR,HRV,12,Europe,2. High income: nonOECD,4292095,Southern Europe,Croatia
+127,496300,CH,CHE,13,Europe,1. High income: OECD,8236303,Western Europe,Switzerland
+128,58740,LU,LUX,11,Europe,1. High income: OECD,594130,Western Europe,Luxembourg
+129,508600,BE,BEL,14,Europe,1. High income: OECD,11491346,Western Europe,Belgium
+130,870800,NL,NLD,14,Europe,1. High income: OECD,17084719,Western Europe,Netherlands
+131,297100,PT,PRT,14,Europe,1. High income: OECD,10839514,Southern Europe,Portugal
+132,1690000,ES,ESP,15,Europe,1. High income: OECD,48958159,Southern Europe,Spain
+133,322000,IE,IRL,13,Europe,1. High income: OECD,5011102,Northern Europe,Ireland
+134,10770,NC,NCL,10,Oceania,2. High income: nonOECD,279070,Melanesia,New Caledonia
+135,1198,SB,SLB,11,Oceania,4. Lower middle income,647581,Melanesia,Solomon Is.
+136,174800,NZ,NZL,12,Oceania,1. High income: OECD,4510327,Australia and New Zealand,New Zealand
+137,1189000,AU,AUS,15,Oceania,1. High income: OECD,23232413,Australia and New Zealand,Australia
+138,236700,LK,LKA,15,Asia,4. Lower middle income,22409381,Southern Asia,Sri Lanka
+139,21140000,CN,CHN,18,Asia,3. Upper middle income,1379302771,Eastern Asia,China
+140,1127000,TW,TWN,15,Asia,2. High income: nonOECD,23508428,Eastern Asia,Taiwan
+141,2221000,IT,ITA,16,Europe,1. High income: OECD,62137802,Southern Europe,Italy
+142,264800,DK,DNK,13,Europe,1. High income: OECD,5605948,Northern Europe,Denmark
+143,2788000,GB,GBR,16,Europe,1. High income: OECD,64769452,Northern Europe,United Kingdom
+144,16150,IS,ISL,10,Europe,1. High income: OECD,339747,Northern Europe,Iceland
+145,167900,AZ,AZE,13,Asia,3. Upper middle income,9961396,Western Asia,Azerbaijan
+146,37270,GE,GEO,12,Asia,4. Lower middle income,4926330,Western Asia,Georgia
+147,801900,PH,PHL,17,Asia,4. Lower middle income,104256076,South-Eastern Asia,Philippines
+148,863000,MY,MYS,15,Asia,3. Upper middle income,31381992,South-Eastern Asia,Malaysia
+149,33730,BN,BRN,10,Asia,2. High income: nonOECD,443593,South-Eastern Asia,Brunei
+150,68350,SI,SVN,12,Europe,1. High income: OECD,1972126,Southern Europe,Slovenia
+151,224137,FI,FIN,13,Europe,1. High income: OECD,5491218,Northern Europe,Finland
+152,168800,SK,SVK,13,Europe,1. High income: OECD,5445829,Eastern Europe,Slovakia
+153,350900,CZ,CZE,14,Europe,1. High income: OECD,10674723,Eastern Europe,Czechia
+154,9169,ER,ERI,13,Africa,5. Low income,5918919,Eastern Africa,Eritrea
+155,4932000,JP,JPN,17,Asia,1. High income: OECD,126451398,Eastern Asia,Japan
+156,64670,PY,PRY,13,South America,4. Lower middle income,6943739,South America,Paraguay
+157,73450,YE,YEM,15,Asia,4. Lower middle income,28036829,Western Asia,Yemen
+158,1731000,SA,SAU,15,Asia,2. High income: nonOECD,28571770,Western Asia,Saudi Arabia
+159,3600,-99,-99,10,Asia,3. Upper middle income,265100,Western Asia,N. Cyprus
+160,29260,CY,CYP,12,Asia,2. High income: nonOECD,1221549,Western Asia,Cyprus
+161,282800,MA,MAR,15,Africa,4. Lower middle income,33986655,Northern Africa,Morocco
+162,1105000,EG,EGY,16,Africa,4. Lower middle income,97041072,Northern Africa,Egypt
+163,90890,LY,LBY,13,Africa,3. Upper middle income,6653210,Northern Africa,Libya
+164,174700,ET,ETH,17,Africa,5. Low income,105350020,Eastern Africa,Ethiopia
+165,3345,DJ,DJI,11,Africa,4. Lower middle income,865267,Eastern Africa,Djibouti
+166,12250,-99,-99,12,Africa,4. Lower middle income,3500000,Eastern Africa,Somaliland
+167,84930,UG,UGA,15,Africa,5. Low income,39570125,Eastern Africa,Uganda
+168,21970,RW,RWA,14,Africa,5. Low income,11901484,Eastern Africa,Rwanda
+169,42530,BA,BIH,12,Europe,3. Upper middle income,3856181,Southern Europe,Bosnia and Herz.
+170,29520,MK,MKD,12,Europe,3. Upper middle income,2103721,Southern Europe,Macedonia
+171,101800,RS,SRB,13,Europe,3. Upper middle income,7111024,Southern Europe,Serbia
+172,10610,ME,MNE,11,Europe,3. Upper middle income,642550,Southern Europe,Montenegro
+173,18490,XK,-99,12,Europe,4. Lower middle income,1895250,Southern Europe,Kosovo
+174,43570,TT,TTO,12,North America,2. High income: nonOECD,1218208,Caribbean,Trinidad and Tobago
+175,20880,SS,SSD,14,Africa,5. Low income,13026129,Eastern Africa,S. Sudan

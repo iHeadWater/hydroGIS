@@ -1,6 +1,6 @@
 # 了解 GEE 
 
-首先，GEE 因为是google下面的，所以国内访问是被墙的，需要科学上网，可以向学校申请，或者自己搜索[相关方法](https://github.com/OuyangWenyu/elks/blob/master/common-sense/else/vpn.md)。
+首先，GEE 因为是google下面的，所以国内访问是被墙的，需要科学上网，可以参考[这里](https://github.com/OuyangWenyu/elks/blob/master/common-sense/else/vpn.md)查看相关方法。
 
 本文件夹下的文档主要记录了GEE的基本内容，data catalog的简介和Javascript及GEE主界面使用方法都主要参考了：[GEO FOR GOOD 2019](https://sites.google.com/earthoutreach.org/geoforgood19/agenda/breakout-sessions)的sessions里的讲解。
 
@@ -12,3 +12,4 @@ Python接口重点参考了[giswqs/earthengine-py-notebooks](https://github.com/
 - 1-gee-intro.md:gee的简介
 - 2-gee-data-catalog-intro.md：GEE数据集
 - 3-gee-python:gee python接口使用
+- 4-geepy-gallery：自己平常实际使用的代码积累
