@@ -3,4 +3,4 @@
 
 目前主要内容如下：
 
-空间插值工具：Kriging[https://github.com/GeoStat-Framework/PyKrige]
+空间插值工具：[Kriging](https://github.com/GeoStat-Framework/PyKrige)
