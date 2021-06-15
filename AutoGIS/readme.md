@@ -24,6 +24,7 @@
 7. 栅格数据简介
 8. 加速GIS计算
 9. My GIS Gallery
+10. 空间数据分析
 
 ## why python for GIS
 
