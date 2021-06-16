@@ -15,6 +15,9 @@ dependencies:
   - rasterstats
   - xarray-spatial
   - geemap
+  - pykrige
+  - pykriging
+ 
 
   # Jupyter Environment
   - jupyterlab
