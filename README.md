@@ -9,7 +9,7 @@ Practices for gis in hydrology
 本repo不会去都尝试涉及，而是主要关注的和水文水资源相关的GIS运算，因此，安排内容大致如下：
 
 - ArcGIS：每个涉及到GIS的人都会知道这个软件，不过我没钱买正版工具，所以就主要了解下ArcGIS的基本概念和简单用法，不做过多记录
-- AutoGIS：主要参考[Automating GIS-processes](https://automating-gis-processes.github.io/site/)，了解Python GIS 常用的开源库，并给一些实例，方便简单的GIS计算
+- AutoGIS：主要参考[Automating GIS-processes](https://github.com/Automating-GIS-processes/site)，了解Python GIS 常用的开源库，并给一些实例，方便简单的GIS计算
 - GEE：google earth engine是非常好用的工具，在科学上网的条件下能高效地处理大多数的GIS计算，这里主要记录一些GEE python接口，尤其是[geemap](https://github.com/giswqs/geemap)的使用。
 - QGIS：基本可以认为是免费版的ArcGIS，因为是开源的，所以不会像商业软件那样做的非常详尽，但是应对水文专业GIS应用还是足够的。
 
