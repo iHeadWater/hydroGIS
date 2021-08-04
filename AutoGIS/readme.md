@@ -1,6 +1,6 @@
 # Learn AutoGIS
 
-本文件夹内容主要基于[AutoGIS课程](https://automating-gis-processes.github.io/site/)，翻译整理其中一部分, 并补充关于GDAL基础 和 更多栅格计算的内容；此外还有一些关于空间统计分析的补充。
+本文件夹内容主要基于[AutoGIS课程](https://autogis-site.readthedocs.io/en/latest/)，翻译整理其中一部分, 并补充关于GDAL基础 和 更多栅格计算的内容；此外还有一些关于空间统计分析的补充。
 
 本文参考了以下资料：
 
