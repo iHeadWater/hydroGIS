@@ -6,15 +6,18 @@ dependencies:
   - python=3.8
 
   # Spatial packages
-  - geopandas  
+  - geopandas
+  - geemap
+  - xarray_leaflet
   - geopy
-  - geojson
-  - mapclassify>=2.2.0
   - contextily
   - osmnx
   - rasterstats
   - xarray-spatial
-  - geemap
+  - pointpats
+  - pykrige
+  - pykriging
 
   # Jupyter Environment
   - jupyterlab
+  - jupyter_contrib_nbextensions

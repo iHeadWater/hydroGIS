@@ -1,6 +1,6 @@
 # Learn AutoGIS
 
-本文件夹内容主要基于[AutoGIS课程](https://automating-gis-processes.github.io/site/)，翻译整理其中一部分, 并补充关于GDAL基础 和 更多栅格计算的内容。
+本文件夹内容主要基于[AutoGIS课程](https://autogis-site.readthedocs.io/en/latest/)，翻译整理其中一部分, 并补充关于GDAL基础 和 更多栅格计算的内容；此外还有一些关于空间统计分析的补充。
 
 本文参考了以下资料：
 
@@ -24,6 +24,7 @@
 7. 栅格数据简介
 8. 加速GIS计算
 9. My GIS Gallery
+10. 空间统计分析
 
 ## why python for GIS
 
@@ -41,24 +42,24 @@ ArcGIS已经把Python作为核心脚本语言，它的ArcPy包提供了对地理
 
 |Layer|Package|Description|WWW|
 |-|-|-|-|
-|Spatial Data IO| gdal|Interface to Geospatial data abstraction library|https://pypi.python.org/pypi/GDAL/(link is external)|
-|| fiona|API to OGR (Vector) layer of GDAL| http://toblerity.org/fiona/(link is external)|
-|| rasterio|Reading and writing geospatial raster data|https://github.com/mapbox/rasterio(link is external)|
-|Geoprocessing| shapely|Deterministic spatial analysis|http://toblerity.org/shapely(link is external)|
-|| rasterstats|Summarizing rasters using vector geometries|https://github.com/perrygeo/python-rasterstats(link is external)|
-|| geopandas|Pandas-like spatial operations on geometric types|http://geopandas.org(link is external)|
-|| pyproj|PROJ4 Interface for cartographic transformations|https://github.com/jswhit/pyproj(link is external)|
-|Geovisualization| basemap|Plotting 2D data on maps|https://github.com/matplotlib/basemap(link is external)|
-||cartopy|Cartographic tools| http://scitools.org.uk/cartopy(link is external)|
-||folium|Visualization via interactive Leaflet maps| https://github.com/python-visualization/folium(link is external)|
-||bokeh|Interactive visualization library browsers| https://github.com/bokeh(link is external)|
-||datashader|Big data visualization graphics pipeline|https://github.com/bokeh/datashader(link is external)|
-|Spatial Statistical Analysis|PySAL|Spatial data analysis| http://pysal.org(link is external)|
-||pykriging|Geostatistics| http://pykriging.com/(link is external)|
-|Spatial Modeling|mesa|Agent based modeling| https://github.com/projectmesa(link is external)|
-||spint|Spatial interaction modeling|https://github.com/pysal/pysal/tree/master/pysal/contrib/spint(link is external)|
-||clusterpy|Spatially constrained clustering|http://www.rise-group.org/zonificando-la-ciudad-por-perfil-de-clientes-copy/(link is external)|
-|Web and Distributed|OWSlib|Client programming interface to OGC web service|https://geopython.github.io/OWSLib/(link is external)|
+|Spatial Data IO| gdal|Interface to Geospatial data abstraction library|https://pypi.python.org/pypi/GDAL/ (link is external)|
+|| fiona|API to OGR (Vector) layer of GDAL| http://toblerity.org/fiona/ (link is external)|
+|| rasterio|Reading and writing geospatial raster data|https://github.com/mapbox/rasterio (link is external)|
+|Geoprocessing| shapely|Deterministic spatial analysis|http://toblerity.org/shapely (link is external)|
+|| rasterstats|Summarizing rasters using vector geometries|https://github.com/perrygeo/python-rasterstats (link is external)|
+|| geopandas|Pandas-like spatial operations on geometric types|http://geopandas.org (link is external)|
+|| pyproj|PROJ4 Interface for cartographic transformations|https://github.com/jswhit/pyproj (link is external)|
+|Geovisualization| basemap|Plotting 2D data on maps|https://github.com/matplotlib/basemap (link is external)|
+||cartopy|Cartographic tools| http://scitools.org.uk/cartopy (link is external)|
+||folium|Visualization via interactive Leaflet maps| https://github.com/python-visualization/folium (link is external)|
+||bokeh|Interactive visualization library browsers| https://github.com/bokeh (link is external)|
+||datashader|Big data visualization graphics pipeline|https://github.com/bokeh/datashader (link is external)|
+|Spatial Statistical Analysis|PySAL|Spatial data analysis| http://pysal.org (link is external)|
+||pykriging|Geostatistics| http://pykriging.com/ (link is external)|
+|Spatial Modeling|mesa|Agent based modeling| https://github.com/projectmesa (link is external)|
+||spint|Spatial interaction modeling|https://github.com/pysal/pysal/tree/master/pysal/contrib/spint (link is external)|
+||clusterpy|Spatially constrained clustering|http://www.rise-group.org/zonificando-la-ciudad-por-perfil-de-clientes-copy/ (link is external)|
+|Web and Distributed|OWSlib|Client programming interface to OGC web service|https://geopython.github.io/OWSLib/ (link is external)|
 ||Stetl|Streaming ETL for geospatial data| http://www.stetl.org/en/latest/|
 
 ## 完全python环境下的GIS工具类型

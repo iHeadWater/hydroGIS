@@ -31,7 +31,7 @@ QGIS是一个多平台的应用，可以在多种操作系统上运行，包括M
 
 然后导入图层。本例所需的URL：  http://kartta.hel.fi/ws/geoserver/avoindata/wfs ，点击新建链接，Name可以输入自己想要的，然后贴入上述URL即可。然后点击Connect链接到该服务。如果弹出错误，忽略即可。然后在给出的列表中，选择Metro railway lines (Seutukartta_liikenne_metro_rata)作为本例使用的数据，点击add即可发现QGIS窗口已经显示出图形了。
 
-可以保存项目到本文件夹下，这里是lesson7.qgz。
+可以保存项目到本文件夹下，这里是AutoGIS/gallery-data文件夹下的lesson7.qgz。
 
 下面就看看如何在控制台中运行QGIS python程序。Plugins > Python console 或者快捷键 Ctrl+Alt+P 进入控制台。输入以下代码可看结果：
 
