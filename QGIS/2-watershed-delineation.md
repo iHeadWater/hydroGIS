@@ -214,4 +214,21 @@ run之后，就会看到生成的流域栅格图。
 
 ![](img/QQ截图20211002110117.png)
 
-以上就是一些基本操作，后续会根据实际使用情况再做更新。
+## 自动化流域划分
+
+上面的步骤每次都一个个地来点，也是挺麻烦的，有几种方式可以帮助实现自动化。
+
+- 直接使用QGIS的Graphical Modeler，参考：[Automate Stream and Catchment Delineation in QGIS with the Graphical Modeler](https://www.youtube.com/watch?v=BKdJMGXgOzg&list=PLeuKJkIxCDj2Gk0CkcJ-QeviE41aMZd-5&index=10)
+- PCRaster也是一个很常用的工具，使用它也能较好地自动化流域划分过程，参考[Derive all subcatchments from a DEM using PCRaster in QGIS](https://www.youtube.com/watch?v=5uGaLIlaFh8&list=PLeuKJkIxCDj2Gk0CkcJ-QeviE41aMZd-5&index=5)和[Hydrological analysis with PCRaster in QGIS](https://www.youtube.com/watch?v=-gmOb27_2O4&list=PLeuKJkIxCDj2Gk0CkcJ-QeviE41aMZd-5&index=6)可以帮助了解PCRaster这个工具，参考[Catchment delineation with PCRaster Python](https://www.youtube.com/watch?v=sFXY1HlfZrw&list=PLeuKJkIxCDj2Gk0CkcJ-QeviE41aMZd-5&index=13)和[Automatic delineation of subcatchments from a DEM using PCRaster Python](https://www.youtube.com/watch?v=vrS7x4jPeiw&list=PLeuKJkIxCDj2Gk0CkcJ-QeviE41aMZd-5&index=9)可以帮助自己自动化划分流域。
+- [PySheds](http://mattbartos.com/pysheds/)也是一个开源工具选择，不过个人尝试了下，可能不是特别稳定，优先推荐使用人更多的上述那些工具
+- 其他比如[WhiteboxTool](https://www.whiteboxgeo.com/)等很经典的工具也能用来划分流域，结合QGIS的Graphical Modeler也容易自动化
+
+如果偏向于直接python编程的，可能PCRaster是个比较不错的选择，如果基于QGIS，那么直接自动化QGIS是很好的，因为本文主要讨论QGIS，所以就记录下如何在QGIS下自动化流域划分。关于PCRaster的使用记录在[这里](https://github.com/OuyangWenyu/hydroGIS/tree/master/AutoGIS/11-PCRaster-hydrology.ipynb)
+
+未完待续。。。
+
+## 把已知的河网图带入
+
+河网分级出来的河流和实际的有时候出入不小，尤其是人类活动影响较大等时候，所以把实际河网刻录进来是必要的，这里主要参考[Burning stream network into DEM layer in QGIS](https://www.youtube.com/watch?v=ZyM1jnxFamU&list=PLeuKJkIxCDj2Gk0CkcJ-QeviE41aMZd-5&index=16)
+
+未完待续。。。
