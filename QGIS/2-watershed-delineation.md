@@ -40,6 +40,8 @@
 
 接下来，就在QGIS上具体操作一个实例。
 
+### 流域划分实操
+
 使用SRTM来划分流域，首先安装下QGIS SRTM下载插件，具体方法可以参考[QGIS教程](https://docs.qgis.org/3.16/en/docs/training_manual/qgis_plugins/fetching_plugins.html)。为了更好地结合着地图来看，再安装一个quickmapservices插件，安装后这个插件可以在“Web”栏下找到，默认地应该是提供了NASA和OSM的一些地图，如果想要更多地图，可以在显示的“Settings”->“More services”里点击 "Get contributed pack"就能将更多地图加载进来了。
 
 这里以赤水河为例了，尝试划分下流域。赤水河于重庆市西南的合江县汇入长江，所以我们感兴趣的区域在这附近选择，这附近的经纬度定到28-29N 105-106E，比较好的判断自己流域大致的笨方法是沿着自己关心的点往上游大致溯源下，这样一直溯源到头来判断范围，本文主要目的是介绍QGIS处理过程，所以比较粗略的看了看，生成的东西不能用于实际研究和应用。我们先换一个投影坐标系，关于坐标系的事，可以看看[这个博客](https://www.jianshu.com/p/6f3f00546f20)，小区域上常用投影系还是UTM，如果在6度范围内，使用UTM投影对地图属性的失真程度是比较小的（参考["映射两个 UTM 带的边界"](https://learn.arcgis.com/zh-cn/projects/choose-the-right-projection/)），全球分了60个UTM带，想找到这里感兴趣区域对应的带，可以直接QGIS界面右下角点击现在默认的“EPSG:4326”，搜索到UTM找到WGS 84 / UTM zone，然后试试不同的值就行了，对应赤水河的区域是WGS 84 / UTM zone 48N，EPSG编码是32648。
@@ -172,5 +174,44 @@ run之后，就会看到生成的流域栅格图。
 
 得到shpfile之后，可以使用它来clip之前生成的各类图层，获取自己想要的该流域范围内的各种GIS图。
 
+### 多点子流域划分
+
+最后补充一个一次性画多个子流域的操作。主要参考：[Snap pour points and delineate multiple catchments in QGIS](https://www.youtube.com/watch?v=Hqc_1CMadhA)，其给出的示例代码在[这里](https://github.com/jvdkwast/PyQGIS_Hydro)。
+
+先把代码下载下来，直接Download ZIP即可，下载后解压。
+
+这是个QGIS的插件代码库，这个代码中每个工具对应一个单独的处理插件，多点流域划分的插件对应的文件叫 points_to_catchments，所以把这个文件夹添加到 QGIS 的profile文件夹下。
+
+先打开QGIS的“settings”->“Options”->"System"，如下图应该能看到自己的这个profile文件夹在哪。
+
+![](img/QQ截图20211002094351.png)
+
+然后把插件文件夹 points 复制到 如下图所示文件夹里
+
+![](img/QQ截图20211002094701.png)
+
+然后在QGIS 插件工具栏里应该能看到这个插件了，如果没有看到就关闭再重启下QGIS。再在插件栏里搜索，应该就会看到如下所示的Points to Catchments插件了。
+
+![](img/QQ截图20211002095431.png)
+
+点击它前面的方框即可激活它。这时候应该在右Processing toolbox里面能看到IHE Delft（这个插件是Delft的老师开发的）一项了，里面有"Hydrology"->"Calculate catchments from points"。
+
+然后导入自己的点矢量图，可以自己创建一个，“Layer”->"Create Layer"->"New Shapefile Layer"，注意坐标系选择和之前生成的channels的坐标系一致，然后再在QGIS左边Layers栏下刚生成的layer项上右键点击，然后选择“Toggle Editing”，手动在刚才河网上选几个点（在河网附近即可，插件会自动校对到河网上的）即可，然后“save for selected layers”。
+
+接下来将这些点定位到河网上，在Processing Toolbox栏里搜索snap，然后使用“Snap Geometries to Layer”，设置如下：
+
+![](img/QQ截图20211002103737.png)
+
+输入是刚刚的点，reference layer是刚才生成的channels，tolerance 选的大小要看自己刚才点的点离河远不远，如果不远不用太大，远的话还是要大一点，否则计算后不动，自己可以用测距工具测测，这里设置了100m。
+
+自己点的点可能是multipoints类型的，需要先转换为points类型才能用刚刚的插件工具，所以工具栏搜索multipoint，使用“Convert multipoints to points”工具转换一下。
+
+然后就可以使用刚刚的插件工具了，设置如下：
+
+![](img/QQ截图20211002104456.png)
+
+点是刚刚snap的点，DEM是之前fill sinks后的DEM。所有文件都会生成在刚刚设置的文件夹中，"Layer"->"Add Layer"->"Add Vector Layer ……"->"Directory"就可以将全部layer一次性加载进来看看了，这里的示例情况是下图这样（因为选择的区域问题，实际流域并不是这样，这里仅供参考）：
+
+![](img/QQ截图20211002110117.png)
 
 以上就是一些基本操作，后续会根据实际使用情况再做更新。
