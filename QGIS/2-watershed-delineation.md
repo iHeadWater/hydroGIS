@@ -214,6 +214,72 @@ run之后，就会看到生成的流域栅格图。
 
 ![](img/QQ截图20211002110117.png)
 
+## 使用WhiteboxTools划分流域
+
+QGIS直接划分流域的方式在相对大一些的流域条件下会有点问题，主要是在计算flow accumulation或者strahler分级时会有内存不足的问题。这可能是QGIS设计时候主要考虑小快多的应用。这里尝试下QGIS中使用 [WhiteboxTool](https://www.whiteboxgeo.com/) 工具的使用，主要参考[Stream & Catchment Delineation with WhiteboxTools in QGIS](https://www.youtube.com/watch?v=8GzN3EPYwU8&list=PLeuKJkIxCDj2Gk0CkcJ-QeviE41aMZd-5&index=4)，QGIS中安装Whiteboxtools的方式可以参考[这里](https://www.youtube.com/watch?v=_Uhm40M-VAA)。
+
+首先，下载WhiteBoxTools工具：https://www.whiteboxgeo.com/download-whiteboxtools/ ，我的是windows，所以直接下载windows版本，填写信息让开发者知道你，然后就能下载了。
+
+因为这里要在QGIS下使用它，所以查看[这里](https://www.whiteboxgeo.com/manual/wbt_book/qgis_plugin.html)，根据文档说明来安装插件即可，这里就不赘述了，简而言之就是先添加插件下载源地址，然后再安装插件，如果添加源后没有搜到插件，就尝试重启下QGIS，如果还不行，可能是QGIS的版本问题，更新版本试试，更新的方式可以参考[这里](https://opensourceoptions.com/blog/how-to-install-or-update-qgis/)。
+
+QGSI的whiteboxtools插件并不自带whiteboxtools的具体核心代码，所以还需要指定插件指向的具体代码位置，将之前下载的WhiteBoxTools解压，然后放到自己想放的地方，接着配置如下：
+
+![](img/QQ截图20211003114724.png)
+
+### 把已知的河网图带入
+
+接下来就能使用它了。Fill sinks操作前面的步骤都是一样的，就不赘述了，DEM拼接切割投影后，不直接fill sinks，而是先处理下河网，这部分可以另外参考[Burning stream network into DEM layer in QGIS](https://www.youtube.com/watch?v=ZyM1jnxFamU&list=PLeuKJkIxCDj2Gk0CkcJ-QeviE41aMZd-5&index=16)；安装一个插件 QuickOSM，然后使用它下载河网数据，设置如下：
+
+![](img/QQ截图20211003145217.png)
+
+然后应该能得到一系列的河网shapefile了，保存则右键刚刚生成的图层，保存到shapefile即可，注意坐标系选自己做后续操作时的投影坐标系。
+
+![](img/QQ截图20211003145836.png)
+
+下面开始将河网烧录入DEM。选择Whitebox工具的“Hydrological Analysis”->"FillBurn"并设置如下：
+
+![](img/QQ截图20211003150705.png)
+
+注意流域也不要太大，太大了也不行，尽可能设多一些出口点，方便划分。
+
+### 划分流域
+
+查看Whitebox工具的划分流域工具“Hydrological Analysis”->"Watershed"，可以看到其输入需要两个文件，一个是D8 Pointer raster即流向图，另一个是出口点，所以要先生成这两个文件。
+
+先生成前者，不过和之前一样也需要先fill sinks，选择“Hydrological Analysis”->"FillDepressionWangAndLiu"工具，并设置如下：
+
+![](img/QQ截图20211003152811.png)
+
+然后选择“Hydrological Analysis”->"D8pointer"工具生成流向图：
+
+![](img/QQ截图20211003153353.png)
+
+下面指定出口点，新建一个 Scratch Layer，如下图，输入自己想要的图层名字并简单指定一个字段，选择几何类型为Point，坐标系别忘了：
+
+![](img/QQ截图20211003154215.png)
+
+然后创建即可，接着就在地图上选择自己想要的出口点，注意尽量靠近出口点实际在的河流。
+
+接下来还需要计算Flow accumulation，才能形成河网，才能把这个点snap上去。使用“Hydrological Analysis”->"D8FlowAccumulation"，设置如下：
+
+![](img/QQ截图20211003154902.png)
+
+接着把刚刚的点snap到flowaccumulation上，选择“Hydrological Analysis”->"SnapPourPoints"工具，并设置如下：
+
+![](img/QQ截图20211003155823.png)
+
+下面就尝试划分流域，使用“Hydrological Analysis”->"Watershed"工具，设置如下：
+
+![](img/QQ截图20211003160115.png)
+
+运行后，就能看到生成的流域栅格图了。
+
+接下来转为矢量图，使用“Data Tools”->"RasterToVectorPolygons"，设置如下：
+
+![](img/QQ截图20211003161233.png)
+
+这样就能得到最后的流域shapefile了。
+
 ## 自动化流域划分
 
 上面的步骤每次都一个个地来点，也是挺麻烦的，有几种方式可以帮助实现自动化。
@@ -221,14 +287,7 @@ run之后，就会看到生成的流域栅格图。
 - 直接使用QGIS的Graphical Modeler，参考：[Automate Stream and Catchment Delineation in QGIS with the Graphical Modeler](https://www.youtube.com/watch?v=BKdJMGXgOzg&list=PLeuKJkIxCDj2Gk0CkcJ-QeviE41aMZd-5&index=10)
 - PCRaster也是一个很常用的工具，使用它也能较好地自动化流域划分过程，参考[Derive all subcatchments from a DEM using PCRaster in QGIS](https://www.youtube.com/watch?v=5uGaLIlaFh8&list=PLeuKJkIxCDj2Gk0CkcJ-QeviE41aMZd-5&index=5)和[Hydrological analysis with PCRaster in QGIS](https://www.youtube.com/watch?v=-gmOb27_2O4&list=PLeuKJkIxCDj2Gk0CkcJ-QeviE41aMZd-5&index=6)可以帮助了解PCRaster这个工具，参考[Catchment delineation with PCRaster Python](https://www.youtube.com/watch?v=sFXY1HlfZrw&list=PLeuKJkIxCDj2Gk0CkcJ-QeviE41aMZd-5&index=13)和[Automatic delineation of subcatchments from a DEM using PCRaster Python](https://www.youtube.com/watch?v=vrS7x4jPeiw&list=PLeuKJkIxCDj2Gk0CkcJ-QeviE41aMZd-5&index=9)可以帮助自己自动化划分流域。
 - [PySheds](http://mattbartos.com/pysheds/)也是一个开源工具选择，不过个人尝试了下，可能不是特别稳定，优先推荐使用人更多的上述那些工具
-- 其他比如[WhiteboxTool](https://www.whiteboxgeo.com/)等很经典的工具也能用来划分流域，结合QGIS的Graphical Modeler也容易自动化
 
 如果偏向于直接python编程的，可能PCRaster是个比较不错的选择，如果基于QGIS，那么直接自动化QGIS是很好的，因为本文主要讨论QGIS，所以就记录下如何在QGIS下自动化流域划分。关于PCRaster的使用记录在[这里](https://github.com/OuyangWenyu/hydroGIS/tree/master/AutoGIS/11-PCRaster-hydrology.ipynb)
-
-未完待续。。。
-
-## 把已知的河网图带入
-
-河网分级出来的河流和实际的有时候出入不小，尤其是人类活动影响较大等时候，所以把实际河网刻录进来是必要的，这里主要参考[Burning stream network into DEM layer in QGIS](https://www.youtube.com/watch?v=ZyM1jnxFamU&list=PLeuKJkIxCDj2Gk0CkcJ-QeviE41aMZd-5&index=16)
 
 未完待续。。。
