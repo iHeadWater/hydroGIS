@@ -280,6 +280,14 @@ QGSI的whiteboxtools插件并不自带whiteboxtools的具体核心代码，所�
 
 这样就能得到最后的流域shapefile了。
 
+最后把流域内河网也提取出来，选择“Stream Network Analysis”->"ExtractStreams"工具，设置如下：
+
+![](img/QQ截图20211003162423.png)
+
+其中河网的channelization 门槛值则需要自己尝试看看，比如这里先试了试10000。然后和地图比较比较，看看河流对的咋样。最后100k的时候差不多，所以选了100k。
+
+然后可以将栅格图转为矢量图，使用“Data Tools”->"RasterToVectorLines"即可，就不再赘述了。
+
 ## 自动化流域划分
 
 上面的步骤每次都一个个地来点，也是挺麻烦的，有几种方式可以帮助实现自动化。
