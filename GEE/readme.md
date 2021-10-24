@@ -9,7 +9,7 @@ Python接口重点参考了[giswqs/earthengine-py-notebooks](https://github.com/
 目前具体安排如下（根据日常使用情况逐渐更新）：
 
 - 0-geo_for_good.md: 简介geo-for-good会议
-- 1-gee-intro.md:gee的简介
+- 1-gee-intro.md:gee的简介（拟根据[EEwPython](https://github.com/csaybar/EEwPython)修改为jupyter示例代码）
 - 2-gee-data-catalog-intro.md：GEE数据集
 - 3-gee-python:gee python接口使用
 - 4-geepy-gallery：自己平常实际使用的代码积累
