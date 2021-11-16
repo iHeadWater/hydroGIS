@@ -8,6 +8,16 @@ QGIS从安装开始。
 
 直接使用QGIS，不结合其他工具代码操作的话，后面就不用看了。
 
+## 安装whitetoolbox插件
+
+首先，下载WhiteBoxTools工具：https://www.whiteboxgeo.com/download-whiteboxtools/ ，我的是windows，所以直接下载windows版本，填写信息让开发者知道你，然后就能下载了。
+
+因为这里要在QGIS下使用它，所以查看[这里](https://www.whiteboxgeo.com/manual/wbt_book/qgis_plugin.html)，根据文档说明来安装插件即可，这里就不赘述了，简而言之就是先添加插件下载源地址，然后再安装插件，如果添加源后没有搜到插件，就尝试重启下QGIS，如果还不行，可能是QGIS的版本问题，更新版本试试，更新的方式可以参考[这里](https://opensourceoptions.com/blog/how-to-install-or-update-qgis/)。
+
+QGSI的whiteboxtools插件并不自带whiteboxtools的具体核心代码，所以还需要指定插件指向的具体代码位置，将之前下载的WhiteBoxTools解压，然后放到自己想放的地方，接着配置如下：
+
+![](img/QQ截图20211003114724.png)
+
 ## 在命令行/IDE中使用PyQGIS
 
 如果需要在 PyCharm中能够连接到PyQGIS，可以参考[How to set environment for PyQGIS 3 in PyCharm](https://haifengniu.com/en/post/pyqgis-pycharm/how-to-set-environment-for-pyqgis-3-in-pycharm/),[PyCharm Directions](https://opensourceoptions.com/courses/topic/pycharm-directions/) 来设置开发环境。

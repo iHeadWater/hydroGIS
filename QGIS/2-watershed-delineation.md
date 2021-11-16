@@ -216,15 +216,7 @@ run之后，就会看到生成的流域栅格图。
 
 ## 使用WhiteboxTools划分流域
 
-QGIS直接划分流域的方式在相对大一些的流域条件下会有点问题，主要是在计算flow accumulation或者strahler分级时会有内存不足的问题。这可能是QGIS设计时候主要考虑小快多的应用。这里尝试下QGIS中使用 [WhiteboxTool](https://www.whiteboxgeo.com/) 工具的使用，主要参考[Stream & Catchment Delineation with WhiteboxTools in QGIS](https://www.youtube.com/watch?v=8GzN3EPYwU8&list=PLeuKJkIxCDj2Gk0CkcJ-QeviE41aMZd-5&index=4)，QGIS中安装Whiteboxtools的方式可以参考[这里](https://www.youtube.com/watch?v=_Uhm40M-VAA)。
-
-首先，下载WhiteBoxTools工具：https://www.whiteboxgeo.com/download-whiteboxtools/ ，我的是windows，所以直接下载windows版本，填写信息让开发者知道你，然后就能下载了。
-
-因为这里要在QGIS下使用它，所以查看[这里](https://www.whiteboxgeo.com/manual/wbt_book/qgis_plugin.html)，根据文档说明来安装插件即可，这里就不赘述了，简而言之就是先添加插件下载源地址，然后再安装插件，如果添加源后没有搜到插件，就尝试重启下QGIS，如果还不行，可能是QGIS的版本问题，更新版本试试，更新的方式可以参考[这里](https://opensourceoptions.com/blog/how-to-install-or-update-qgis/)。
-
-QGSI的whiteboxtools插件并不自带whiteboxtools的具体核心代码，所以还需要指定插件指向的具体代码位置，将之前下载的WhiteBoxTools解压，然后放到自己想放的地方，接着配置如下：
-
-![](img/QQ截图20211003114724.png)
+QGIS直接划分流域的方式在相对大一些的流域条件下会有点问题，主要是在计算flow accumulation或者strahler分级时会有内存不足的问题。这可能是QGIS设计时候主要考虑小快多的应用。这里尝试下QGIS中使用 [WhiteboxTool](https://www.whiteboxgeo.com/) 工具的使用，主要参考[Stream & Catchment Delineation with WhiteboxTools in QGIS](https://www.youtube.com/watch?v=8GzN3EPYwU8&list=PLeuKJkIxCDj2Gk0CkcJ-QeviE41aMZd-5&index=4)，QGIS中安装Whiteboxtools的方式可以参考[这里](https://www.youtube.com/watch?v=_Uhm40M-VAA)。在上一节安装qgis中也有介绍其安装方式。
 
 ### 把已知的河网图带入
 
