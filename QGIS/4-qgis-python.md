@@ -1,12 +1,15 @@
 # 使用Python定制qgis
 
-本文主要参考[Customizing QGIS with Python](https://courses.spatialthoughts.com/pyqgis-in-a-day.html)，了解QGIS 环境中 Python 编程，日常积累一些常用的QGIS操作的自动化。
+本文主要参考以下资料，了解QGIS 环境中 Python 编程，日常积累一些常用的QGIS操作的自动化，重点是QGIS Processing的编程使用，不过让我们先从python qgis的介绍开始。
+
+- [Customizing QGIS with Python](https://courses.spatialthoughts.com/pyqgis-in-a-day.html)
+- [Using processing algorithms from the console](https://docs.qgis.org/3.22/en/docs/user_manual/processing/console.html)
 
 ## PyQGIS 初识
 
-QGIS 提供了 Python API（应用程序编程接口），俗称 PyQGIS。 API 非常丰富且功能强大。可以使用 QGIS 进行的几乎所有操作都可以使用 API 完成。这允许开发人员编写代码来构建新工具、自定义界面和自动化工作流程。
+QGIS 提供了 Python API（应用程序编程接口），一般称作 PyQGIS。 API 非常丰富且功能强大。可以使用 QGIS 进行的几乎所有操作都可以使用 API 完成。这允许开发人员编写代码来构建新工具、自定义界面和自动化工作流程。
 
-现在尝试使用 API 来执行一些 GIS 数据管理任务。
+现在尝试使用 API 来执行一些 GIS 数据管理任务，来初步见识下它。
 
 qgis中浏览example数据目录并加载 liaoning shapefile 图层。打开属性表。该图层有 8 个属性列。假设我们要从图层中删除第2列。
 
@@ -116,15 +119,57 @@ type(mb) 能告诉我们对象的类是什么。
 
 类具有提供功能的方法。可以在实例对象上运行类方法。对于 QMessageBox 类， setText() 方法能向对话框添加文本。
 
-## 尝试运行 Processing 算法
+## **QGIS Processing**
 
-虽然 PyQGIS API 提供了许多用于处理图层、特征、属性和几何的函数 - 使用内置处理算法来更改图层或进行任何分析是更好的做法。这将为我们提供更好的性能并带来更少的代码。以下是有关如何使用 Python 中的处理算法（即processing toolbox中的算法）进行矢量和栅格图层编辑的一些示例，本文主要目的也是为了自动化这些GIS处理过程。
+QGIS processing framework 是一个处理环境，它能用来调用QGIS自带或者第三方的算法。Processing是QGIS的核心插件，也就是 processing toolbox，即平常最常用的QGIS的工具箱。所以这部分才是python QGIS编程最常用的部分。
 
-要通过 Python 使用任何处理算法，您需要知道如何指定所有必需的参数。这最容易通过首先通过 GUI 运行算法来获得。
+接下来看看如何在console中使用processing toolbox。
 
-接下来学习如何从 DEM 创建山体阴影栅格。
+第一步，就是打开console，和前面介绍的是一致的，然后导入processing工具。
 
-先使用 QGIS 执行任务：
+```Python
+from qgis import processing
+```
+
+执行一个算法的最基本函数就是run()，其参数主要包括两部分，一是算法名，第二是一系列参数，字典格式，表明算法需要的参数。
+
+所以第一我们要知道我们想要调用的算法名字是什么，这个名字和在toolbox中看到的名字是不完全一样的，而是一个单独的命令行名字，为了找到名字可以使用如下代码：
+
+```Python
+for alg in QgsApplication.processingRegistry().algorithms():
+    print(alg.id(), "->", alg.displayName())
+```
+
+它会列出名字，在里面找到自己想要的名称即可。
+
+接下来就要了解第二个参数怎么设置了。有一种方式能详细地列出算法细节：algorithmHelp(id_of_the_algorithm)。
+
+例如：
+
+```Python
+processing.algorithmHelp("native:buffer")
+```
+
+就会列出buffer函数的细节。
+
+然后我们就能运行函数了：processing.run(name_of_the_algorithm, parameters)
+
+还是buffer函数：
+
+```Python
+processing.run("native:buffer", {'INPUT': '/data/lines.shp',
+               'DISTANCE': 100.0,
+               'SEGMENTS': 10,
+               'DISSOLVE': True,
+               'END_CAP_STYLE': 0,
+               'JOIN_STYLE': 0,
+               'MITER_LIMIT': 10,
+               'OUTPUT': '/data/buffers.shp'})
+```
+
+接下来是一个小例子，看看如何从 DEM 创建山体阴影栅格。
+
+先使用 QGIS processing toolbox 执行任务：
 
 1. 浏览到数据目录并加载 srtm.tif 层；从处理工具箱中搜索并找到处理工具箱 → 栅格地形分析 → 山体阴影算法；双击打开它。
 2. 选择 srtm 作为 Elevation 图层，并将所有其他参数保留为默认值。单击运行。

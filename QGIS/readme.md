@@ -2,11 +2,14 @@
 
 QGIS 是GIS开源社区一个强大的跨平台工具，本文件夹下将根据自己日常使用QGIS情况记录水文水资源中常用的QGIS操作。
 
-目前核心内容是流域划分，主要参考资料：
+目前内容规划是这样的：
 
-- [Youtube上Catchment Delineation with GIS系列视频](https://www.youtube.com/watch?v=ZLUjSEK-nbg&list=PLeuKJkIxCDj2Gk0CkcJ-QeviE41aMZd-5)
+1. qgis及相关工具安装
+2. 从流域划分这一常见任务开始QGIS的实践
+3. 日常积累QGIS常用工具箱工具使用方法
+4. 如何在QGIS中使用python编程
 
-其他以后可能用到的资料有：
+以下是一些QGIS相关资料：
 
 - [QGIS Documentation](https://docs.qgis.org/latest/en/docs/index.html)
 - [QGIS简体中文操作手册](https://malagis.com/qgis-handbook-index.html)

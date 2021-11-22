@@ -1,6 +1,6 @@
 # QGIS中划分流域
 
-本文主要参考[Youtube上Catchment Delineation with GIS系列视频](https://www.youtube.com/watch?v=ZLUjSEK-nbg&list=PLeuKJkIxCDj2Gk0CkcJ-QeviE41aMZd-5)学习如何使用QGIS划分流域。
+本文主要参考[Youtube上Catchment Delineation with GIS系列视频](https://www.youtube.com/watch?v=ZLUjSEK-nbg&list=PLeuKJkIxCDj2Gk0CkcJ-QeviE41aMZd-5)学习如何使用QGIS划分流域。因为流域划分是水文中一个非常常见的GIS任务，所以用它作为实践的开始，是个不错的学习QGIS的方式。
 
 ## 如何划分流域
 

@@ -1,15 +1,23 @@
 # 积累一些常用的QGIS操作
 
+一些常用图形界面操作的简单积累记录，主要是processing toolbox中的处理工具的使用。参考资料：
+
+- [24. QGIS processing framework](https://docs.qgis.org/3.22/en/docs/user_manual/processing/intro.html)
+
 ## 导入数据
 
-一般的layer数据直接导入即可，MDB格式的文件相对特殊一点，这里简单记录下。主要参考：
+一般的layer数据直接导入即可，比如常见的shp文件；
+
+gdb文件一般是文件夹，直接通过 "Layer" -> "Add Layer" -> "Add Vector Layer"，然后选择 "Directory" 导入gdb文件夹即可，如果有问题可以看下[这里](https://gis.stackexchange.com/questions/26285/installing-file-geodatabase-gdb-support-in-qgis)；
+
+MDB格式的文件相对特殊一点，这里简单记录下。主要参考：
 
 - [How to Open Personal Geodatabase in QGIS](https://www.youtube.com/watch?v=RTtn0TA1fYM)
 - [Opening Esri Personal Geodatabase (*.mdb) using QGIS?](https://gis.stackexchange.com/questions/129514/opening-esri-personal-geodatabase-mdb-using-qgis)
 
 首先，下载一个示例数据，从[这里](https://www.cger.nies.go.jp/db/gdbd/gdbd_index_e.html)下载，选择“Asia”下载即可。
 
-这是Esri的格式文件，必须在windows下打开，需要安装access数据库的引擎，我是安装的 office 365，所以已经自带了，就不再重复安装了，需要安装的请在[这里](http://www.microsoft.com/en-gb/download/details.aspx?id=13255)下载。
+这是Esri的格式文件，必须在windows下打开，需要安装access数据库的引擎，我是安装的 office 365，所以已经自带了，就不再重复安装了，需要安装的请在[这里](http://www.microsoft.com/en-gb/download/details.aspx?id=13255)下载后安装。
 
 在windows搜索栏搜索 ODBC，打开给出的 “ODBC 数据源（64位）”，点击“添加”，选择“Microsoft Access Driver ...”，然后起名字，我起了“PersonalMDB”，然后如下图所示“选择”好数据库对应到刚刚下载的mdb文件，然后点击“确定”。
 
@@ -94,6 +102,34 @@ NAME这一列属性的值就等于layer这一列的值了。
 ![](img/QQ截图20211115214059.png)
 
 根据这里的介绍，面积计算默认的单位是 square meters，所以如果想要转换单位在 area 后做单位转换计算即可。
+
+### 字符串字段转为数字字段
+
+可以直接使用如下：
+
+![](img/QQ截图20211121113508.png)
+
+填写如图中的选项，即可生成一个新的shapefile，它里面包含自己刚刚填的新字段名，会把老的字符串字段转换为数字字段，表示不同的类别。
+
+### 切割矢量图
+
+使用工具箱中的 "Vector overlay" -> "Extract/clip by extent"即可。
+
+如果不成功，可以先fix一下矢量图，"Vector geometry" -> "Fix geometries"
+
+### 矢量数据转栅格
+
+比如要把shapefile转为geotiff文件。
+
+直接使用工具栏里的 Rasterize (vector to raster) 工具即可：https://docs.qgis.org/2.8/en/docs/user_manual/processing_algs/gdalogr/gdal_conversion/rasterize.html
+
+如下字段是一般要填的：
+
+![](img/QQ截图20211121115826.png)
+
+字段里面georeference units，我这个例子中是cm。所以100表示栅格分辨率是1m，可以自己试一试大的数，然后用测距工具测一测最小的网格长度就知道分辨率到底是多少了。
+
+因为是转成栅格值，所以选择的输入字段值只能是数字格式，如果是字符串想转，可以先转成数字字段。
 
 ## 栅格数据操作
 
