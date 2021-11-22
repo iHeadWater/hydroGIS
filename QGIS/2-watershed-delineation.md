@@ -290,4 +290,4 @@ QGIS直接划分流域的方式在相对大一些的流域条件下会有点问�
 
 如果偏向于直接python编程的，可能PCRaster是个比较不错的选择，如果基于QGIS，那么直接自动化QGIS是很好的，因为本文主要讨论QGIS，所以就记录下如何在QGIS下自动化流域划分。关于PCRaster的使用记录在[这里](https://github.com/OuyangWenyu/hydroGIS/tree/master/AutoGIS/11-PCRaster-hydrology.ipynb)
 
-未完待续。。。
+更多内容后续会逐步补充。
