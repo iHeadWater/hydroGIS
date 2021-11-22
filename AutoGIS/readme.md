@@ -25,6 +25,7 @@
 8. 加速GIS计算
 9. My GIS Gallery
 10. 空间统计分析
+11. 更多工具介绍
 
 ## why python for GIS
 

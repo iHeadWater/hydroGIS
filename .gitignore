@@ -118,3 +118,4 @@ envs
 /AutoGIS/ospy_data4
 /GEE/tmp
 /GEE/large_files
+/GEE/data/gridmet.nc

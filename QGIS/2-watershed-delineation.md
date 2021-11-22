@@ -1,6 +1,6 @@
 # QGIS中划分流域
 
-本文主要参考[Youtube上Catchment Delineation with GIS系列视频](https://www.youtube.com/watch?v=ZLUjSEK-nbg&list=PLeuKJkIxCDj2Gk0CkcJ-QeviE41aMZd-5)学习如何使用QGIS划分流域。
+本文主要参考[Youtube上Catchment Delineation with GIS系列视频](https://www.youtube.com/watch?v=ZLUjSEK-nbg&list=PLeuKJkIxCDj2Gk0CkcJ-QeviE41aMZd-5)学习如何使用QGIS划分流域。因为流域划分是水文中一个非常常见的GIS任务，所以用它作为实践的开始，是个不错的学习QGIS的方式。
 
 ## 如何划分流域
 
@@ -214,4 +214,80 @@ run之后，就会看到生成的流域栅格图。
 
 ![](img/QQ截图20211002110117.png)
 
-以上就是一些基本操作，后续会根据实际使用情况再做更新。
+## 使用WhiteboxTools划分流域
+
+QGIS直接划分流域的方式在相对大一些的流域条件下会有点问题，主要是在计算flow accumulation或者strahler分级时会有内存不足的问题。这可能是QGIS设计时候主要考虑小快多的应用。这里尝试下QGIS中使用 [WhiteboxTool](https://www.whiteboxgeo.com/) 工具的使用，主要参考[Stream & Catchment Delineation with WhiteboxTools in QGIS](https://www.youtube.com/watch?v=8GzN3EPYwU8&list=PLeuKJkIxCDj2Gk0CkcJ-QeviE41aMZd-5&index=4)，QGIS中安装Whiteboxtools的方式可以参考[这里](https://www.youtube.com/watch?v=_Uhm40M-VAA)。在上一节安装qgis中也有介绍其安装方式。
+
+### 把已知的河网图带入
+
+接下来就能使用它了。Fill sinks操作前面的步骤都是一样的，就不赘述了，DEM拼接切割投影后，不直接fill sinks，而是先处理下河网，这部分可以另外参考[Burning stream network into DEM layer in QGIS](https://www.youtube.com/watch?v=ZyM1jnxFamU&list=PLeuKJkIxCDj2Gk0CkcJ-QeviE41aMZd-5&index=16)；安装一个插件 QuickOSM，然后使用它下载河网数据，设置如下：
+
+![](img/QQ截图20211003145217.png)
+
+然后应该能得到一系列的河网shapefile了，保存则右键刚刚生成的图层，保存到shapefile即可，注意坐标系选自己做后续操作时的投影坐标系。
+
+![](img/QQ截图20211003145836.png)
+
+下面开始将河网烧录入DEM。选择Whitebox工具的“Hydrological Analysis”->"FillBurn"并设置如下：
+
+![](img/QQ截图20211003150705.png)
+
+注意流域也不要太大，太大了也不行，尽可能设多一些出口点，方便划分。
+
+### 划分流域
+
+查看Whitebox工具的划分流域工具“Hydrological Analysis”->"Watershed"，可以看到其输入需要两个文件，一个是D8 Pointer raster即流向图，另一个是出口点，所以要先生成这两个文件。
+
+先生成前者，不过和之前一样也需要先fill sinks，选择“Hydrological Analysis”->"FillDepressionWangAndLiu"工具，并设置如下：
+
+![](img/QQ截图20211003152811.png)
+
+然后选择“Hydrological Analysis”->"D8pointer"工具生成流向图：
+
+![](img/QQ截图20211003153353.png)
+
+下面指定出口点，新建一个 Scratch Layer，如下图，输入自己想要的图层名字并简单指定一个字段，选择几何类型为Point，坐标系别忘了：
+
+![](img/QQ截图20211003154215.png)
+
+然后创建即可，接着就在地图上选择自己想要的出口点，注意尽量靠近出口点实际在的河流。
+
+接下来还需要计算Flow accumulation，才能形成河网，才能把这个点snap上去。使用“Hydrological Analysis”->"D8FlowAccumulation"，设置如下：
+
+![](img/QQ截图20211003154902.png)
+
+接着把刚刚的点snap到flowaccumulation上，选择“Hydrological Analysis”->"SnapPourPoints"工具，并设置如下：
+
+![](img/QQ截图20211003155823.png)
+
+下面就尝试划分流域，使用“Hydrological Analysis”->"Watershed"工具，设置如下：
+
+![](img/QQ截图20211003160115.png)
+
+运行后，就能看到生成的流域栅格图了。
+
+接下来转为矢量图，使用“Data Tools”->"RasterToVectorPolygons"，设置如下：
+
+![](img/QQ截图20211003161233.png)
+
+这样就能得到最后的流域shapefile了。
+
+最后把流域内河网也提取出来，选择“Stream Network Analysis”->"ExtractStreams"工具，设置如下：
+
+![](img/QQ截图20211003162423.png)
+
+其中河网的channelization 门槛值则需要自己尝试看看，比如这里先试了试10000。然后和地图比较比较，看看河流对的咋样。最后100k的时候差不多，所以选了100k。
+
+然后可以将栅格图转为矢量图，使用“Data Tools”->"RasterToVectorLines"即可，就不再赘述了。
+
+## 自动化流域划分
+
+上面的步骤每次都一个个地来点，也是挺麻烦的，有几种方式可以帮助实现自动化。
+
+- 直接使用QGIS的Graphical Modeler，参考：[Automate Stream and Catchment Delineation in QGIS with the Graphical Modeler](https://www.youtube.com/watch?v=BKdJMGXgOzg&list=PLeuKJkIxCDj2Gk0CkcJ-QeviE41aMZd-5&index=10)
+- PCRaster也是一个很常用的工具，使用它也能较好地自动化流域划分过程，参考[Derive all subcatchments from a DEM using PCRaster in QGIS](https://www.youtube.com/watch?v=5uGaLIlaFh8&list=PLeuKJkIxCDj2Gk0CkcJ-QeviE41aMZd-5&index=5)和[Hydrological analysis with PCRaster in QGIS](https://www.youtube.com/watch?v=-gmOb27_2O4&list=PLeuKJkIxCDj2Gk0CkcJ-QeviE41aMZd-5&index=6)可以帮助了解PCRaster这个工具，参考[Catchment delineation with PCRaster Python](https://www.youtube.com/watch?v=sFXY1HlfZrw&list=PLeuKJkIxCDj2Gk0CkcJ-QeviE41aMZd-5&index=13)和[Automatic delineation of subcatchments from a DEM using PCRaster Python](https://www.youtube.com/watch?v=vrS7x4jPeiw&list=PLeuKJkIxCDj2Gk0CkcJ-QeviE41aMZd-5&index=9)可以帮助自己自动化划分流域。
+- [PySheds](http://mattbartos.com/pysheds/)也是一个开源工具选择，不过个人尝试了下，可能不是特别稳定，优先推荐使用人更多的上述那些工具
+
+如果偏向于直接python编程的，可能PCRaster是个比较不错的选择，如果基于QGIS，那么直接自动化QGIS是很好的，因为本文主要讨论QGIS，所以就记录下如何在QGIS下自动化流域划分。关于PCRaster的使用记录在[这里](https://github.com/OuyangWenyu/hydroGIS/tree/master/AutoGIS/11-PCRaster-hydrology.ipynb)
+
+更多内容后续会逐步补充。
