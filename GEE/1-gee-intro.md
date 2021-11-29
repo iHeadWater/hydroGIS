@@ -97,6 +97,56 @@ GEE可以直接导出的数据包括：FeatureCollection和Image。ImageCollecti
 - 矢量文件table
 - 视频video
 
+导出的时候可能会遇到要批量点击“Run”的情况，如果特别多，一个个点就比较麻烦了，这时候可以使用这个工具：[gee-hydro/gee_monkey](https://github.com/gee-hydro/gee_monkey)。
+
+先运行GEE脚本，待Tasks处出现很多个可Run的任务后，将界面切换到Tasks界面下。
+
+然后浏览器处按F12，接着把下面的代码粘贴进控制台：
+
+```Javascript
+/**
+ * Copyright (c) 2017 Dongdong Kong. All rights reserved.
+ * This work is licensed under the terms of the MIT license.  
+ * For a copy, see <https://opensource.org/licenses/MIT>.
+ *
+ * Batch execute GEE Export task
+ *
+ * First of all, You need to generate export tasks. And run button was shown.
+ *   
+ * Then press F12 get into console, then paste those scripts in it, and press 
+ * enter. All the task will be start automatically. 
+ * (Firefox and Chrome are supported. Other Browsers I didn't test.)
+ * 
+ * @Author: 
+ *  Dongdong Kong, 28 Aug' 2017, Sun Yat-sen University
+ *  yzq.yang, 17 Sep' 2021
+ */
+function runTaskList(){
+    // var tasklist = document.getElementsByClassName('task local type-EXPORT_IMAGE awaiting-user-config');
+    // for (var i = 0; i < tasklist.length; i++)
+    //         tasklist[i].getElementsByClassName('run-button')[0].click();
+    $$('.run-button' ,$$('ee-task-pane')[0].shadowRoot).forEach(function(e) {
+         e.click();
+    })
+}
+
+function confirmAll() {
+    // var ok = document.getElementsByClassName('goog-buttonset-default goog-buttonset-action');
+    // for (var i = 0; i < ok.length; i++)
+    //     ok[i].click();
+    $$('ee-table-config-dialog, ee-image-config-dialog').forEach(function(e) {
+         var eeDialog = $$('ee-dialog', e.shadowRoot)[0]
+         var paperDialog = $$('paper-dialog', eeDialog.shadowRoot)[0]
+         $$('.ok-button', paperDialog)[0].click()
+    })
+}
+
+runTaskList();
+confirmAll();
+```
+
+最好依次粘贴执行上述函数定义和调用代码，runTaskList()执行后，会弹出确认“Run”的窗口，然后再运行confirmAll()，就会运行全部可Run的任务了。
+
 #### UI编程
 
 ui.Chart:图表是GEE展示统计结果直观的手段,通过图表我们可以做各种数据统计。GEE使用的chart就是Google Chart，所以相关文档可以直接查询[Google Charts](https://developers.google.com/chart/interactive/docs/)。

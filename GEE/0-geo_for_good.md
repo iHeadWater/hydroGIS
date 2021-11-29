@@ -1,8 +1,8 @@
 # Geo for good
 
-Geo for Good User Summit是一个Google的会议，每年都会有，会对Google地球相关的内容进行讨论和培训。这里仅简单了解下从2019年与GEE相关的培训材料内容介绍，以储备一些GEE的使用资料。
+Geo for Good User Summit是一个Google的会议，每年都会有，会对Google地球相关的内容进行讨论和培训。这里仅简单了解下从2019年与GEE相关的培训材料内容介绍，以储备一些GEE的使用资料。后续的请直接在网上搜索。
 
-## 基础知识补充
+## 补充一点概念
 
 首先，补充一些基本卫星的解释，以使后面的阅读顺利。
 
@@ -269,4 +269,4 @@ Export.table.toAsset({
 });
 ```
 
-执行代码之后，在Code Editor右侧的Tasks一栏下会有对应的导出任务，选择run即可执行。可以选择导出到Drive/Cloud Storage/EE Asset三者中任一个，通常情况下，个人觉得可以选择EE Asset。
+执行代码之后，在Code Editor右侧的Tasks一栏下会有对应的导出任务，选择run即可执行。可以选择导出到Drive/Cloud Storage/EE Asset三者中任一个，一般还是优先选择Drive。
