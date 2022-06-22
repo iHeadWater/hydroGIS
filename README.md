@@ -16,17 +16,23 @@ Practices for gis in hydrology
 environment.yml里记录了win10下AutoGIS和GEE文件夹下内容所需的python环境, 参考了：https://github.com/earthlab/earth-analytics-python-env/blob/main/environment.yml 。在项目根目录下打开终端，执行以下语句即可安装环境, 安装时间会比较长, 请耐心等待：
 
 ```Shell
-conda env create -f environment.yml
+# conda 安装太慢，换mamba安装了，如果没有mamba，在base下安装一个
+conda install mamba -c conda-forge
+# base下没有jupyterlab的话，也要安装
+conda install -c conda-forge jupyterlab jupyter_contrib_nbextensions
+# 然后安装环境
+mambda env create -f environment.yml
 ```
 
-这个安装很慢，请你忍一下；如果忍不了，可以试试mamba：
+安装后，激活环境即可使用
 
 ```Shell
-conda create -n hydroGIS python=3.8
+# 激活环境
 conda activate hydroGIS
-conda install geopandas
-conda install mamba -c conda-forge
-mamba install geemap xarray_leaflet geopy contextily osmnx rasterstats xarray-spatial pointpats pykrige pykriging jupyterlab jupyter_contrib_nbextensions -c conda-forge
+# 把hydroGIS的kernel显示到base的jupyterlab里
+python -m ipykernel install --user --name hydroGIS --display-name "hydroGIS"
+# 打开jupyterlab
+jupyter lab
 ```
 
 目前内容主要集中在AutoGIS里，后期会根据自己GIS的使用情况逐步更新。
