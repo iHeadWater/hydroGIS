@@ -31,7 +31,7 @@ mambda env create -f environment.yml
 conda activate hydroGIS
 # 把hydroGIS的kernel显示到base的jupyterlab里
 python -m ipykernel install --user --name hydroGIS --display-name "hydroGIS"
-# 打开jupyterlab
+# 打开jupyterlab，如果你本来就是打开jupyterlab后，在终端里执行的这些操作，就不用再打开了
 jupyter lab
 ```
 
