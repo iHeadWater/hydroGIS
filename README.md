@@ -33,6 +33,9 @@ conda activate hydroGIS
 python -m ipykernel install --user --name hydroGIS --display-name "hydroGIS"
 # 打开jupyterlab，如果你本来就是打开jupyterlab后，在终端里执行的这些操作，就不用再打开了
 jupyter lab
+# 我们现在打开的是base环境下的jupyter lab（避免重复，我们没有在hydroGIS环境下安装jupyterlab）
+# 为了在jupyter lab上展示地图，我们需要在base环境下安装ipyleaflet
+conda install -c conda-forge ipyleaflet
 ```
 
 目前内容主要集中在AutoGIS里，后期会根据自己GIS的使用情况逐步更新。
