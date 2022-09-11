@@ -9,6 +9,7 @@ dependencies:
   - geopandas
   - geemap
   - wxee
+  - eemont
   - xarray_leaflet
   - geopy
   - contextily

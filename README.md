@@ -19,9 +19,9 @@ environment.yml里记录了win10下AutoGIS和GEE文件夹下内容所需的pytho
 # conda 安装太慢，换mamba安装了，如果没有mamba，在base下安装一个
 conda install mamba -c conda-forge
 # base下没有jupyterlab的话，也要安装
-conda install -c conda-forge jupyterlab jupyter_contrib_nbextensions
+conda install -c conda-forge jupyterlab jupyter_contrib_nbextensions ipyleaflet
 # 然后安装环境
-mambda env create -f environment.yml
+mamba env create -f environment.yml
 ```
 
 安装后，激活环境即可使用
@@ -33,9 +33,6 @@ conda activate hydroGIS
 python -m ipykernel install --user --name hydroGIS --display-name "hydroGIS"
 # 打开jupyterlab，如果你本来就是打开jupyterlab后，在终端里执行的这些操作，就不用再打开了
 jupyter lab
-# 我们现在打开的是base环境下的jupyter lab（避免重复，我们没有在hydroGIS环境下安装jupyterlab）
-# 为了在jupyter lab上展示地图，我们需要在base环境下安装ipyleaflet
-conda install -c conda-forge ipyleaflet
 ```
 
 目前内容主要集中在AutoGIS里，后期会根据自己GIS的使用情况逐步更新。
