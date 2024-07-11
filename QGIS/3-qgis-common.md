@@ -146,5 +146,3 @@ NAME这一列属性的值就等于layer这一列的值了。
 泰森多边形常用于流域雨量站降雨均值计算。在QGIS中直接调用processing Toolbox工具里的Vector Geometry ‣ Voronoi polygon 即可。设置里一般选一个buffer，比如15.
 
 接下来就用Vector overlay ‣ Clip算法，根据流域切割刚生成的泰森多边形。
-
-
